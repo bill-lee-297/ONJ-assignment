@@ -1,12 +1,40 @@
-import React, { useState } from 'react';
-import { dummyTemplates } from '../data/templates';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import type { Template } from '../data/templates';
 import Button from '../components/Atoms/Button';
+import getTemplates from '../service/getTemplates';
+import Box from '@/components/Atoms/Box';
 
 const ListPage: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
-  const filteredTemplates = dummyTemplates.filter((tpl) =>
-    tpl.title.toLowerCase().includes(searchKeyword.toLowerCase())
-  );
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const navigate = useNavigate();
+
+  const getTemplatesList = () => {
+    const templates = getTemplates('search', searchKeyword) as Template[];
+    setTemplates(templates);
+  };
+
+  const handleDelete = (id: string) => {
+    getTemplates('delete', id);
+    getTemplatesList();
+  };
+
+  useEffect(() => {
+    window.addEventListener('storage', () => {
+      getTemplatesList();
+    });
+
+    return () => {
+      window.removeEventListener('storage', () => {
+        getTemplatesList();
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    getTemplatesList();
+  }, [searchKeyword]);
 
   return (
     <div>
@@ -15,28 +43,28 @@ const ListPage: React.FC = () => {
           type="text"
           value={searchKeyword}
           onChange={(e) => setSearchKeyword(e.target.value)}
-          placeholder="템플릿 이름으로 검색"
+          placeholder="템플릿 이름으로 검색..."
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
       </div>
       <h2 className="text-2xl font-bold mb-6">템플릿 목록</h2>
       <div className="flex flex-col gap-4">
-        {filteredTemplates.map((tpl) => (
-          <div
+        {templates?.map((tpl: Template) => (
+          <Box
             key={tpl.id}
-            className="border rounded-lg p-6 bg-white shadow-sm"
+            onClick={() => navigate(`/${tpl.id}`)}
+            className="cursor-pointer"
           >
             <div className="font-semibold text-lg">{tpl.title}</div>
             <div className="text-gray-600 my-1">{tpl.description}</div>
-            <div className="text-sm text-gray-500">생성일: {tpl.createdAt.slice(0, 10)}</div>
-            <div className="mt-4 flex gap-2">
-              <Button>미리보기</Button>
-              <Button>편집</Button>
-              <Button>삭제</Button>
+            <div className="text-sm text-gray-500">생성일: {new Date(tpl.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}</div>
+            <div className="mt-4 flex gap-2" onClick={e => e.stopPropagation()}>
+              <Button onClick={() => navigate(`/${tpl.id}/edit`)}>편집</Button>
+              <Button onClick={() => handleDelete(tpl.id)}>삭제</Button>
             </div>
-          </div>
+          </Box>
         ))}
-        {filteredTemplates.length === 0 && (
+        {templates.length === 0 && (
           <div className="text-center text-gray-400 py-8">검색 결과가 없습니다.</div>
         )}
       </div>

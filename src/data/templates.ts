@@ -1,8 +1,11 @@
+export type TemplateFieldType = 'text' | 'checkbox' | 'dropdown' | 'radio';
+
 export interface TemplateField {
   id: string;
-  type: 'text' | 'checkbox' | 'dropdown';
+  type: TemplateFieldType;
   label: string;
   options?: string[];
+  required?: boolean;
 }
 
 export interface Template {
@@ -14,6 +17,12 @@ export interface Template {
   fields: TemplateField[];
 }
 
+export interface TemplateQuestionProps {
+  fields: TemplateField[];
+  idx: number;
+  setFields: (fields: TemplateField[]) => void;
+}
+
 export const dummyTemplates: Template[] = [
   {
     id: 'tpl-1',
@@ -22,9 +31,9 @@ export const dummyTemplates: Template[] = [
     createdAt: '2024-06-01T10:00:00Z',
     updatedAt: '2024-06-01T10:00:00Z',
     fields: [
-      { id: 'fld-1', type: 'text', label: '이름' },
-      { id: 'fld-2', type: 'dropdown', label: '만족도', options: ['매우 만족', '만족', '보통', '불만족'] },
-      { id: 'fld-3', type: 'text', label: '의견' }
+      { id: 'fld-1', type: 'text', label: '이름', required: true },
+      { id: 'fld-2', type: 'dropdown', label: '만족도', options: ['매우 만족', '만족', '보통', '불만족'], required: true },
+      { id: 'fld-3', type: 'text', label: '의견', required: false }
     ]
   },
   {
@@ -34,9 +43,9 @@ export const dummyTemplates: Template[] = [
     createdAt: '2024-06-02T09:00:00Z',
     updatedAt: '2024-06-02T09:00:00Z',
     fields: [
-      { id: 'fld-1', type: 'text', label: '이름' },
-      { id: 'fld-2', type: 'text', label: '연락처' },
-      { id: 'fld-3', type: 'checkbox', label: '참가 희망 세션', options: ['A', 'B', 'C'] }
+      { id: 'fld-1', type: 'text', label: '이름', required: true },
+      { id: 'fld-2', type: 'text', label: '연락처', required: true },
+      { id: 'fld-3', type: 'checkbox', label: '참가 희망 세션', options: ['A', 'B', 'C'], required: false }
     ]
   }
-]; 
+];
