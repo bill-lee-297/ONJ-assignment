@@ -3,7 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import IcButton from './IcButton';
 import OptionsRow from './OptionsRow';
 
-const OptionRadio: React.FC<TemplateQuestionProps & { type: TemplateFieldType }> = ({ idx, fields, setFields, type }) => {
+const Option: React.FC<TemplateQuestionProps & { type: TemplateFieldType }> = ({ idx, fields, setFields, type }) => {
   const field = fields[idx];
   const options = field.options;
 
@@ -51,10 +51,10 @@ const OptionRadio: React.FC<TemplateQuestionProps & { type: TemplateFieldType }>
         {(type === 'radio' || type === 'checkbox') && <input type={type} className="w-4 h-4" checked={false} />}
         {type === 'dropdown' && <div>{options?.length ? options?.length + 1 : 1}</div>}
 
-        <input type="text" className="text-sm h-8" placeholder="옵션 추가" onClick={onAddOption} />
+        <input type="text" className="text-sm h-8" placeholder="옵션 추가" onClick={onAddOption} readOnly />
       </OptionsRow>
     </div>
   );
 };
 
-export default OptionRadio;
+export default Option;

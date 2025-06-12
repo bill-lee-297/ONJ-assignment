@@ -3,7 +3,7 @@ import type { TemplateQuestionProps } from '../../data/templates';
 import IcButton from '../Atoms/IcButton';
 
 
-const FieldOptions: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
+const FieldToolbar: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
   const field = fields[idx];
 
   const onToggleRequired = () => {
@@ -47,4 +47,4 @@ const FieldOptions: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields 
   );
 };
 
-export default FieldOptions;
+export default FieldToolbar;

@@ -4,18 +4,22 @@ import type { Template } from '../data/templates';
 import Button from '../components/Atoms/Button';
 import getTemplates from '../service/getTemplates';
 import Box from '@/components/Atoms/Box';
+import { useAlert } from '@/hooks/useAlert';
 
 const ListPage: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [templates, setTemplates] = useState<Template[]>([]);
   const navigate = useNavigate();
+  const showAlert = useAlert();
 
   const getTemplatesList = () => {
     const templates = getTemplates('search', searchKeyword) as Template[];
     setTemplates(templates);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    const confirmed = await showAlert('삭제하시겠습니까?', { cancel: true });
+    if (!confirmed) return;
     getTemplates('delete', id);
     getTemplatesList();
   };

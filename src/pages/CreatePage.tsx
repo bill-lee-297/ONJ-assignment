@@ -5,12 +5,14 @@ import DescriptionInput from '../components/Atoms/DescriptionInput';
 import FormLabel from '../components/Atoms/FormLabel';
 import FieldLabel from '../components/Molecules/FieldLabel';
 import FieldContent from '../components/Molecules/FieldContents';
-import FieldOptions from '../components/Molecules/FieldOptions';
+import FieldToolbar from '../components/Molecules/FieldToolbar';
 import type { Template, TemplateField } from '../data/templates';
 import { useNavigate } from 'react-router';
+import { useAlert } from '@/hooks/useAlert';
 
 const CreatePage: React.FC = () => {
   const navigate = useNavigate();
+  const showAlert = useAlert();
   const [title, setTitle] = useState('제목 없는 템플릿');
   const [description, setDescription] = useState('');
   const [fields, setFields] = useState<TemplateField[]>([]);
@@ -26,16 +28,20 @@ const CreatePage: React.FC = () => {
     ]);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const optionCheck = fields.filter((field) => field.type === 'radio' || field.type === 'checkbox' || field.type === 'dropdown').some((field) => field.options?.length === 0);
-    if(optionCheck) {
-      alert('옵션을 추가해주세요.');
+    if(fields.length === 0) {
+      await showAlert('질문을 추가해주세요.', { cancel: false });
       return;
     }
 
-    // localStorage에서 데이터 조회	
+    const optionCheck = fields.filter((field) => field.type === 'radio' || field.type === 'checkbox' || field.type === 'dropdown').some((field) => field.options?.length === 0);
+    if(optionCheck) {
+      await showAlert('옵션을 추가해주세요.', { cancel: false });
+      return;
+    }
+
     const templates = localStorage.getItem('templates');
     const newTemplate: Template = {
       id: `tpl-${templates?.length ? templates?.length + 1 : 1}`,
@@ -82,7 +88,7 @@ const CreatePage: React.FC = () => {
             <div key={field.id} className="flex flex-col gap-2 border border-gray-300 rounded px-4 py-5">
               <FieldLabel idx={idx} fields={fields} setFields={setFields} />
               <FieldContent idx={idx} fields={fields} setFields={setFields} />
-              <FieldOptions idx={idx} fields={fields} setFields={setFields} />
+              <FieldToolbar idx={idx} fields={fields} setFields={setFields} />
             </div>
           ))}
         </div>

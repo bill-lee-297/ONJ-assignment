@@ -6,20 +6,23 @@ import CreatePage from './pages/CreatePage';
 import DetailPage from './pages/Detail';
 import NotFoundPage from './pages/NotFoundPage';
 import Layout from './components/Layout';
+import { OverlayProvider } from '@toss/use-overlay';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<ListPage />} />
-          <Route path="/create" element={<CreatePage />} />
-          <Route path="/:id/edit" element={<EditPage />} />
-          <Route path="/:id" element={<DetailPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <OverlayProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<ListPage />} />
+            <Route path="/create" element={<CreatePage />} />
+            <Route path="/:id/edit" element={<EditPage />} />
+            <Route path="/:id" element={<DetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </OverlayProvider>
   );
 };
 

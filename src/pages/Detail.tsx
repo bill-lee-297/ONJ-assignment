@@ -2,18 +2,20 @@ import React from 'react';
 import useTemplates from '../service/getTemplates';
 import { useParams } from 'react-router';
 import Box from '../components/Atoms/Box';
-
+import Button from '@/components/Atoms/Button';
+import { useNavigate } from 'react-router';
 import type { Template, TemplateField } from '../data/templates';
 import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
 
+
 const DetailPage: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const filteredTemplates = useTemplates('detail', id || '') as Template;
 
   if(!filteredTemplates) {
     return <div>템플릿을 찾을 수 없습니다.</div>;
   }
-
 
   return (
     <div>
@@ -31,6 +33,10 @@ const DetailPage: React.FC = () => {
             <DetailFieldOptions type={field.type} options={field.options || []} />
           </Box>
         ))}
+      </div>
+
+      <div className="flex justify-end mt-5">
+        <Button onClick={() => navigate(`/${id}/edit`)}>편집</Button>
       </div>
     </div>
   );
