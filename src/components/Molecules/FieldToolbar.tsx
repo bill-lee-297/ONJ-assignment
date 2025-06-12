@@ -1,5 +1,5 @@
 import { MdDeleteOutline } from "react-icons/md";
-import type { TemplateQuestionProps } from '../../data/templates';
+import type { TemplateQuestionProps } from '../../type/templates';
 import IcButton from '../Atoms/IcButton';
 
 

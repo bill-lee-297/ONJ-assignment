@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '../components/Atoms/Box';
-import type { Template, TemplateField } from '../data/templates';
+import type { Template, TemplateField } from '../type/templates';
 import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
 
 const PreviewPage: React.FC = () => {

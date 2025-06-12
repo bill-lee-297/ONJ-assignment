@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import Box from '../components/Atoms/Box';
 import Button from '@/components/Atoms/Button';
 import { useNavigate } from 'react-router';
-import type { Template, TemplateField } from '../data/templates';
+import type { Template, TemplateField } from '../type/templates';
 import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
 
 

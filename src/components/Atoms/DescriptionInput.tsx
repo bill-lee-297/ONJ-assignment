@@ -14,7 +14,7 @@ const DescriptionInput: React.FC<DescriptionInputProps> = ({ value, onChange, re
     <textarea
       value={value}
       onChange={onChange}
-      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
+      className="w-full text-md border-b border-gray-300 px-3 py-2"
       placeholder={placeholder}
       required={required}
       rows={rows}

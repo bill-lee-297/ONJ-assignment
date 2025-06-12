@@ -1,4 +1,4 @@
-import type { TemplateFieldType, TemplateQuestionProps } from '../../data/templates';
+import type { TemplateFieldType, TemplateQuestionProps } from '../../type/templates';
 import { IoMdClose } from "react-icons/io";
 import IcButton from './IcButton';
 import OptionsRow from './OptionsRow';

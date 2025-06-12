@@ -1,4 +1,4 @@
-import type { TemplateQuestionProps } from '../../data/templates';
+import type { TemplateQuestionProps } from '../../type/templates';
 
 const FieldLabel: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
 

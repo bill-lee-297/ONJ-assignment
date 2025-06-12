@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import type { Template } from '../data/templates';
+import type { Template } from '../type/templates';
 import Button from '../components/Atoms/Button';
 import getTemplates from '../service/getTemplates';
 import Box from '@/components/Atoms/Box';
 import { useAlert } from '@/hooks/useAlert';
+import { useSearchStore } from '../store/searchStore';
 
 const ListPage: React.FC = () => {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const searchKeyword = useSearchStore((state) => state.searchKeyword);
   const [templates, setTemplates] = useState<Template[]>([]);
   const navigate = useNavigate();
   const showAlert = useAlert();
@@ -42,15 +43,6 @@ const ListPage: React.FC = () => {
 
   return (
     <div>
-      <div className="mb-6">
-        <input
-          type="text"
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          placeholder="템플릿 이름으로 검색..."
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
-        />
-      </div>
       <h2 className="text-2xl font-bold mb-6">템플릿 목록</h2>
       <div className="flex flex-col gap-4">
         {templates?.map((tpl: Template) => (

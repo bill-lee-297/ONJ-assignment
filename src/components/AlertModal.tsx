@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button';
+import Button from './Atoms/Button';
 
 interface AlertModalProps {
   open: boolean;

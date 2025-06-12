@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Button from '../components/Atoms/Button';
 import TitleInput from '../components/Atoms/TitleInput';
 import DescriptionInput from '../components/Atoms/DescriptionInput';
-import FormLabel from '../components/Atoms/FormLabel';
 import FieldLabel from '../components/Molecules/FieldLabel';
 import FieldContent from '../components/Molecules/FieldContents';
 import FieldToolbar from '../components/Molecules/FieldToolbar';
-import type { Template, TemplateField } from '../data/templates';
+import type { Template, TemplateField } from '../type/templates';
 import { useNavigate } from 'react-router';
 import { useAlert } from '@/hooks/useAlert';
+import CreateHeader from '../components/Molecules/CreateHeader';
+import CreateTitle from '../components/Molecules/CreateTitle';
 
 const CreatePage: React.FC = () => {
   const navigate = useNavigate();
@@ -62,41 +63,13 @@ const CreatePage: React.FC = () => {
     navigate('/');
   }
 
-  const handlePreview = () => {
-    localStorage.setItem('previewTemplate', JSON.stringify({ title, description, fields }));
-
-    window.open('/preview', '_blank');
-  }
-
   return (
-    <div className="h-full w-full flex flex-col justify-center py-12">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">새 템플릿 생성</h2>
-        <Button onClick={() => handlePreview()}>미리보기</Button>
-      </div>
+    <div className="h-full w-full flex flex-col justify-center">
+      <CreateHeader title="새 템플릿 생성" preview={{title, description, fields}} />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mx-auto">
-        <div>
-          <FormLabel>제목</FormLabel>
-          <TitleInput
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            placeholder="템플릿 제목을 입력하세요"
-            id="template-title"
-          />
-        </div>
-        <div>
-          <FormLabel>설명</FormLabel>
-          <DescriptionInput
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            placeholder="템플릿 설명"
-            rows={1}
-            id="template-description"
-          />
-        </div>
+        <CreateTitle title={title} description={description} setTitle={setTitle} setDescription={setDescription} />
+
         <div className="flex flex-col gap-10">
           {fields.map((field, idx) => (
             <div key={field.id} className="flex flex-col gap-2 border border-gray-300 rounded px-4 py-5">

@@ -1,4 +1,4 @@
-import type { Template } from '../data/templates';
+import type { Template } from '../type/templates';
 
 const getTemplates = (type: 'search' | 'detail' | 'delete', text: string): Template[] | Template | null => {
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
