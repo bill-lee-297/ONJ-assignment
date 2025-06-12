@@ -36,7 +36,7 @@ const DetailPage: React.FC = () => {
       </div>
 
       <div className="flex justify-end mt-5">
-        <Button onClick={() => navigate(`/${id}/edit`)}>편집</Button>
+        <Button onClick={() => navigate(`/${id}/edit`)}>수정</Button>
       </div>
     </div>
   );

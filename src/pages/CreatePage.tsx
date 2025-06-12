@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../components/Atoms/Button';
 import TitleInput from '../components/Atoms/TitleInput';
 import DescriptionInput from '../components/Atoms/DescriptionInput';
@@ -16,6 +16,10 @@ const CreatePage: React.FC = () => {
   const [title, setTitle] = useState('제목 없는 템플릿');
   const [description, setDescription] = useState('');
   const [fields, setFields] = useState<TemplateField[]>([]);
+
+  useEffect(() => {
+    localStorage.setItem('previewTemplate', JSON.stringify({ title, description, fields }));
+  }, [title, description, fields]);
 
   const handleAddField = () => {
     setFields([
@@ -58,9 +62,19 @@ const CreatePage: React.FC = () => {
     navigate('/');
   }
 
+  const handlePreview = () => {
+    localStorage.setItem('previewTemplate', JSON.stringify({ title, description, fields }));
+
+    window.open('/preview', '_blank');
+  }
+
   return (
     <div className="h-full w-full flex flex-col justify-center py-12">
-      <h2 className="text-2xl font-bold mb-6">새 템플릿 생성</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold">새 템플릿 생성</h2>
+        <Button onClick={() => handlePreview()}>미리보기</Button>
+      </div>
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mx-auto">
         <div>
           <FormLabel>제목</FormLabel>
@@ -93,7 +107,7 @@ const CreatePage: React.FC = () => {
           ))}
         </div>
         <div className="flex items-center justify-center mt-5">
-          <Button type="button" onClick={handleAddField}>질문 추가</Button>
+          <Button type="button" onClick={handleAddField}>+ 질문 추가</Button>
         </div>
         <Button type="submit" onClick={handleSubmit}>저장</Button>
       </form>

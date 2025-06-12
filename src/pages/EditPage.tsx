@@ -40,7 +40,7 @@ const EditPage: React.FC = () => {
     ]);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleModifySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(fields.length === 0) {
       await showAlert('질문을 추가해주세요.', { cancel: false });
@@ -51,6 +51,12 @@ const EditPage: React.FC = () => {
       await showAlert('옵션을 추가해주세요.', { cancel: false });
       return;
     }
+
+    const confirmed = await showAlert('이대로 수정하시겠습니까?', { cancel: true });
+    if(!confirmed) {
+      return;
+    }
+
     const templates = JSON.parse(localStorage.getItem('templates') || '[]');
     const updatedTemplates = templates.map((tpl: Template) =>
       tpl.id === id
@@ -61,10 +67,59 @@ const EditPage: React.FC = () => {
     navigate('/');
   };
 
+  const handleNewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if(fields.length === 0) {
+      await showAlert('질문을 추가해주세요.', { cancel: false });
+      return;
+    }
+    const optionCheck = fields.filter((field) => field.type === 'radio' || field.type === 'checkbox' || field.type === 'dropdown').some((field) => field.options?.length === 0);
+    if(optionCheck) {
+      await showAlert('옵션을 추가해주세요.', { cancel: false });
+      return;
+    }
+
+    const confirmed = await showAlert('새로운 템플릿으로 생성하시겠습니까?', { cancel: true });
+    if(!confirmed) {
+      return;
+    }
+
+    const templates = localStorage.getItem('templates');
+    const newTemplate: Template = {
+      id: `tpl-${templates?.length ? templates?.length + 1 : 1}`,
+      title,
+      description,
+      fields,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+
+    const newTemplates = templates ? [...JSON.parse(templates), newTemplate] : [newTemplate];
+    localStorage.setItem('templates', JSON.stringify(newTemplates));
+
+    navigate(`/${newTemplate.id}`);
+  }
+
+  const handlePreview = () => {
+    const preview = {
+      title,
+      description,
+      fields
+    }
+    const previewTemplate = JSON.stringify(preview);
+    localStorage.setItem('previewTemplate', previewTemplate);
+
+    window.open('/preview', '_blank');
+  }
+
   return (
     <div className="h-full w-full flex flex-col justify-center py-12">
-      <h2 className="text-2xl font-bold mb-6">템플릿 편집</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold">템플릿 수정</h2>
+        <Button onClick={() => handlePreview()}>미리보기</Button>
+      </div>
+
+      <form className="flex flex-col gap-4 w-full mx-auto">
         <div>
           <FormLabel>제목</FormLabel>
           <TitleInput
@@ -96,9 +151,12 @@ const EditPage: React.FC = () => {
           ))}
         </div>
         <div className="flex items-center justify-center mt-5">
-          <Button type="button" onClick={handleAddField}>질문 추가</Button>
+          <Button type="button" onClick={handleAddField}>+ 질문 추가</Button>
         </div>
-        <Button type="submit" onClick={handleSubmit}>저장</Button>
+        <div className="flex items-center justify-between mt-5 gap-5">
+          <Button type="submit" onClick={handleNewSubmit}>새로운 템플릿으로 생성</Button>
+          <Button type="submit" onClick={handleModifySubmit}>수정</Button>
+        </div>
       </form>
     </div>
   );
