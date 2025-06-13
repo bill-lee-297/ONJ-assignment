@@ -1,6 +1,7 @@
 import type { TemplateQuestionProps } from '../../type/templates';
 
-const FieldLabel: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
+
+const FieldLabel = ({ idx, fields, setFields }: TemplateQuestionProps) => {
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
     const newFields = [...fields];

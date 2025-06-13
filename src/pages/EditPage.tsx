@@ -9,7 +9,7 @@ import { useAlert } from '@/hooks/useAlert';
 import CreateHeader from '../components/Molecules/CreateHeader';
 import CreateTitle from '../components/Molecules/CreateTitle';
 
-const EditPage: React.FC = () => {
+const EditPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const showAlert = useAlert();

@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from './Atoms/Button';
 
 interface AlertModalProps {
@@ -8,7 +7,7 @@ interface AlertModalProps {
   onCancel?: () => void;
 }
 
-const AlertModal: React.FC<AlertModalProps> = ({ open, message, onConfirm, onCancel }) => {
+const AlertModal = ({ open, message, onConfirm, onCancel }: AlertModalProps) => {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.3)' }}>

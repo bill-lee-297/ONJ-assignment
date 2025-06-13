@@ -11,7 +11,7 @@ import { useAlert } from '@/hooks/useAlert';
 import CreateHeader from '../components/Molecules/CreateHeader';
 import CreateTitle from '../components/Molecules/CreateTitle';
 
-const CreatePage: React.FC = () => {
+const CreatePage = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
   const [title, setTitle] = useState('제목 없는 템플릿');
@@ -67,7 +67,7 @@ const CreatePage: React.FC = () => {
     <div className="h-full w-full flex flex-col justify-center">
       <CreateHeader title="새 템플릿 생성" preview={{title, description, fields}} />
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mx-auto">
+      <form className="flex flex-col gap-4 w-full mx-auto">
         <CreateTitle title={title} description={description} setTitle={setTitle} setDescription={setDescription} />
 
         <div className="flex flex-col gap-10">
@@ -82,7 +82,7 @@ const CreatePage: React.FC = () => {
         <div className="flex items-center justify-center mt-5">
           <Button type="button" onClick={handleAddField}>+ 질문 추가</Button>
         </div>
-        <Button type="submit" onClick={handleSubmit}>저장</Button>
+        <Button type="button" onClick={handleSubmit}>저장</Button>
       </form>
     </div>
   );

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import OptionsRow from "../Atoms/OptionsRow";
 
-const DetailFieldOptions = ({ type, options }: { type: string, options: string[] }) => {
+interface DetailFieldOptionsProps {
+  type: string;
+  options: string[]
+}
+
+const DetailFieldOptions = ({ type, options }: DetailFieldOptionsProps) => {
   const [selectedRadio, setSelectedRadio] = useState<number>();
   const [selectedCheckbox, setSelectedCheckbox] = useState<number[]>([]);
   const [selectedDropdown, setSelectedDropdown] = useState<string>('');

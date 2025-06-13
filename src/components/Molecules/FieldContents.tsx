@@ -1,7 +1,7 @@
 import type { TemplateQuestionProps } from '../../type/templates';
 import Options from '../Atoms/Options';
 
-const FieldContent: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
+const FieldContent = ({ idx, fields, setFields }: TemplateQuestionProps) => {
   const field = fields[idx];
 
   const renderFieldContent = () => {

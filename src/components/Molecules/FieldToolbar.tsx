@@ -3,7 +3,7 @@ import type { TemplateQuestionProps } from '../../type/templates';
 import IcButton from '../Atoms/IcButton';
 
 
-const FieldToolbar: React.FC<TemplateQuestionProps> = ({ idx, fields, setFields }) => {
+const FieldToolbar = ({ idx, fields, setFields }: TemplateQuestionProps) => {
   const field = fields[idx];
 
   const onToggleRequired = () => {

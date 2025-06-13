@@ -8,7 +8,7 @@ interface TitleInputProps {
   id?: string;
 }
 
-const TitleInput: React.FC<TitleInputProps> = ({ value, onChange, required = false, placeholder = '제목', id, ...props }) => {
+const TitleInput = ({ value, onChange, required = false, placeholder = '제목', id, ...props }: TitleInputProps) => {
   return (
     <input
       type="text"

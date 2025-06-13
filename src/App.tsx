@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import ListPage from './pages/ListPage';
 import EditPage from './pages/EditPage';
@@ -9,7 +8,7 @@ import Layout from './components/Layout';
 import { OverlayProvider } from '@toss/use-overlay';
 import PreviewPage from './pages/PreviewPage';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <OverlayProvider>
       <BrowserRouter>

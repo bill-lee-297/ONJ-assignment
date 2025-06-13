@@ -1,4 +1,3 @@
-import React from 'react';
 import useTemplates from '../service/getTemplates';
 import { useParams } from 'react-router';
 import Box from '../components/Atoms/Box';
@@ -8,7 +7,7 @@ import type { Template, TemplateField } from '../type/templates';
 import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
 
 
-const DetailPage: React.FC = () => {
+const DetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const filteredTemplates = useTemplates('detail', id || '') as Template;

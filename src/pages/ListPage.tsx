@@ -7,7 +7,7 @@ import Box from '@/components/Atoms/Box';
 import { useAlert } from '@/hooks/useAlert';
 import { useSearchStore } from '../store/searchStore';
 
-const ListPage: React.FC = () => {
+const ListPage = () => {
   const searchKeyword = useSearchStore((state) => state.searchKeyword);
   const [templates, setTemplates] = useState<Template[]>([]);
   const navigate = useNavigate();

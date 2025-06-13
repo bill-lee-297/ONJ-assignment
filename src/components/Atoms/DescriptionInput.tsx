@@ -9,7 +9,7 @@ interface DescriptionInputProps {
   id?: string;
 }
 
-const DescriptionInput: React.FC<DescriptionInputProps> = ({ value, onChange, required = false, placeholder = '설명', rows = 1, id, ...props }) => {
+const DescriptionInput = ({ value, onChange, required = false, placeholder = '설명', rows = 1, id, ...props } : DescriptionInputProps) => {
   return (
     <textarea
       value={value}

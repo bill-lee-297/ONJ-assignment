@@ -1,7 +1,12 @@
 import Button from "../Atoms/Button";
 import type { Template } from "../../type/templates";
 
-const CreateHeader = ({ title, preview }: { title: string, preview: Pick<Template, 'title' | 'description' | 'fields'> }) => {
+interface CreateHeaderProps {
+  title: string;
+  preview: Pick<Template, 'title' | 'description' | 'fields'>;
+}
+
+const CreateHeader = ({ title, preview }: CreateHeaderProps) => {
 
   const handlePreview = () => {
     localStorage.setItem('previewTemplate', JSON.stringify(preview));

@@ -1,9 +1,17 @@
-import type { TemplateFieldType, TemplateQuestionProps } from '../../type/templates';
+import type { TemplateFieldType, TemplateField } from '../../type/templates';
 import { IoMdClose } from "react-icons/io";
 import IcButton from './IcButton';
 import OptionsRow from './OptionsRow';
 
-const Option: React.FC<TemplateQuestionProps & { type: TemplateFieldType }> = ({ idx, fields, setFields, type }) => {
+interface OptionProps {
+  idx: number;
+  fields: TemplateField[];
+  setFields: (fields: TemplateField[]) => void;
+  type: TemplateFieldType;
+}
+
+
+const Option = ({ idx, fields, setFields, type }: OptionProps) => {
   const field = fields[idx];
   const options = field.options;
 
