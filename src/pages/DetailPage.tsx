@@ -35,7 +35,7 @@ const DetailPage = () => {
       </div>
 
       <div className="flex justify-end mt-5">
-        <Button onClick={() => navigate(`/${id}/edit`)}>수정</Button>
+        <Button onClick={() => navigate(`/edit/${id}`)}>수정</Button>
       </div>
     </div>
   );

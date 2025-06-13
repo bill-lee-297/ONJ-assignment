@@ -22,7 +22,6 @@ const CreateTitle = ({ title, description, setTitle, setDescription }: CreateTit
       <DescriptionInput
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        required
         placeholder="템플릿 설명"
         rows={1}
         id="template-description"

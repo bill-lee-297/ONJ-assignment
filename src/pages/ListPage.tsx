@@ -55,7 +55,7 @@ const ListPage = () => {
             <div className="text-gray-600 my-1">{tpl.description}</div>
             <div className="text-sm text-gray-500">생성일: {new Date(tpl.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}</div>
             <div className="mt-4 flex gap-2" onClick={e => e.stopPropagation()}>
-              <Button onClick={() => navigate(`/${tpl.id}/edit`)}>수정</Button>
+              <Button onClick={() => navigate(`/edit/${tpl.id}`)}>수정</Button>
               <Button onClick={() => handleDelete(tpl.id)}>삭제</Button>
             </div>
           </Box>

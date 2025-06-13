@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import ListPage from './pages/ListPage';
-import EditPage from './pages/EditPage';
 import CreatePage from './pages/CreatePage';
 import DetailPage from './pages/DetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -16,7 +15,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<ListPage />} />
             <Route path="/create" element={<CreatePage />} />
-            <Route path="/:id/edit" element={<EditPage />} />
+            <Route path="/edit/:id" element={<CreatePage />} />
             <Route path="/:id" element={<DetailPage />} />
             <Route path="/preview" element={<PreviewPage />} />
             <Route path="*" element={<NotFoundPage />} />
