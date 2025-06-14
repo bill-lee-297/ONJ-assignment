@@ -7,9 +7,10 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-const Button = ({ children, className = '', ...props }: ButtonProps) => {
+const Button = ({ children, className = '', type = 'button', ...props }: ButtonProps) => {
   return (
     <button
+      type={type}
       className={`px-4 py-1 rounded border border-gray-300 bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors cursor-pointer ${className}`}
       {...props}
     >
@@ -18,4 +19,4 @@ const Button = ({ children, className = '', ...props }: ButtonProps) => {
   );
 };
 
-export default Button; 
+export default Button;

@@ -22,4 +22,4 @@ const AlertModal = ({ open, message, onConfirm, onCancel }: AlertModalProps) => 
   );
 };
 
-export default AlertModal; 
+export default AlertModal;

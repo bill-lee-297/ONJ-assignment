@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '../components/Atoms/Box';
 import type { Template, TemplateField } from '../type/templates';
 import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
+import MenuTitle from '@/components/Atoms/MenuTitle';
+import ContentTitle from '@/components/Atoms/ContentTitle';
+import ContentDesc from '@/components/Atoms/ContentDesc';
 
 const PreviewPage = () => {
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null);
@@ -9,26 +12,26 @@ const PreviewPage = () => {
   useEffect(() => {
     setPreviewTemplate(JSON.parse(localStorage.getItem('previewTemplate') || '{}') as Template);
 
-    window.addEventListener('storage', (e) => {
+    window.addEventListener('storage', e => {
       const previewTemplate = JSON.parse(e.newValue || '{}') as Template;
       setPreviewTemplate(previewTemplate);
     });
 
     return () => {
       window.removeEventListener('storage', () => {});
-    }
+    };
   }, []);
 
-  if(!previewTemplate) {
+  if (!previewTemplate) {
     return <div>템플릿을 찾을 수 없습니다.</div>;
   }
 
-
   return (
     <div>
+      <MenuTitle className="mb-6">템플릿 미리보기</MenuTitle>
       <Box>
-        <h1 className="text-2xl font-bold">{previewTemplate.title || ''}</h1>
-        <p className="text-gray-500">{previewTemplate.description || ''}</p>
+        <ContentTitle>{previewTemplate.title || ''}</ContentTitle>
+        <ContentDesc>{previewTemplate.description || ''}</ContentDesc>
       </Box>
       <div className="flex flex-col gap-2">
         {previewTemplate.fields.map((field: TemplateField) => (
@@ -45,4 +48,4 @@ const PreviewPage = () => {
   );
 };
 
-export default PreviewPage; 
+export default PreviewPage;

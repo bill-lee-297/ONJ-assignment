@@ -9,7 +9,7 @@ export function useAlert() {
   const overlay = useOverlay();
 
   const showAlert = (message: string, options?: ShowAlertOptions): Promise<boolean> => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       overlay.open(({ isOpen, close }) => (
         <AlertModal
           open={isOpen}
@@ -18,14 +18,18 @@ export function useAlert() {
             close();
             resolve(true);
           }}
-          onCancel={options?.cancel ? () => {
-            close();
-            resolve(false);
-          } : undefined}
+          onCancel={
+            options?.cancel
+              ? () => {
+                  close();
+                  resolve(false);
+                }
+              : undefined
+          }
         />
       ));
     });
   };
 
   return showAlert;
-} 
+}

@@ -16,7 +16,7 @@ const App = () => {
             <Route path="/" element={<ListPage />} />
             <Route path="/create" element={<CreatePage />} />
             <Route path="/edit/:id" element={<CreatePage />} />
-            <Route path="/:id" element={<DetailPage />} />
+            <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/preview" element={<PreviewPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
