@@ -1,4 +1,4 @@
-import { useSearchStore } from '../../store/searchStore';
+import { useSearchStore } from '@/store/searchStore';
 
 const Search = () => {
   const searchKeyword = useSearchStore(state => state.searchKeyword);

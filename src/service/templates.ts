@@ -1,6 +1,6 @@
-import type { Template } from '../type/templates';
+import type { Template } from '@/type/templates';
 
-const getTemplates = (type: 'search' | 'detail' | 'delete', text: string): Template[] | Template | null => {
+const getTemplates = (type: 'search' | 'detail', text: string): Template[] | Template | null => {
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
 
   if (type === 'search') {
@@ -14,12 +14,13 @@ const getTemplates = (type: 'search' | 'detail' | 'delete', text: string): Templ
     return template ? template : null;
   }
 
-  if (type === 'delete') {
-    const newTemplates = templates.filter((tpl: Template) => tpl.id !== text);
-    localStorage.setItem('templates', JSON.stringify(newTemplates));
-  }
-
   return [];
 };
 
-export default getTemplates;
+const deleteTemplate = (id: string) => {
+  const templates = JSON.parse(localStorage.getItem('templates') || '[]');
+  const newTemplates = templates.filter((tpl: Template) => tpl.id !== id);
+  localStorage.setItem('templates', JSON.stringify(newTemplates));
+};
+
+export { getTemplates, deleteTemplate };

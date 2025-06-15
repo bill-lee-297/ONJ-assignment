@@ -1,10 +1,10 @@
-import type { TemplateQuestionType, TemplateQuestion } from '../../type/templates';
+import type { TemplateQuestionType, TemplateQuestion } from '@/type/templates';
 import { IoMdClose } from 'react-icons/io';
-import OptionsRow from '../Atoms/OptionsRow';
-import CheckInput from '../Atoms/CheckInput';
+import OptionsRow from '@/components/Atoms/OptionsRow';
+import CheckInput from '@/components/Atoms/CheckInput';
 import { useCreateStore } from '@/store/createStore';
 import { memo } from 'react';
-import OptionInput from '../Atoms/OptionInput';
+import OptionInput from '@/components/Atoms/OptionInput';
 
 interface OptionProps {
   question: TemplateQuestion;

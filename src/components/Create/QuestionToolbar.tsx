@@ -1,33 +1,27 @@
 import { MdDeleteOutline } from 'react-icons/md';
-import type { TemplateQuestion } from '../../type/templates';
-import ToggleButton from '../Atoms/ToggleButton';
+import type { TemplateQuestion } from '@/type/templates';
+import ToggleButton from '@/components/Atoms/ToggleButton';
 import { useCreateStore } from '@/store/createStore';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 
 interface QuestionToolbarProps {
   question: TemplateQuestion;
 }
 
 const QuestionToolbar = memo(({ question }: QuestionToolbarProps) => {
-  const setQuestions = useCreateStore(state => state.setQuestions);
-  const questions = useCreateStore(state => state.questions);
+  const deleteQuestion = useCreateStore(state => state.deleteQuestion);
   const setQuestion = useCreateStore(state => state.setQuestion);
 
-  const handleDeleteQuestion = useCallback((questionId: string) => {
-    const newQuestions = questions.filter(q => q.id !== questionId);
-    setQuestions(newQuestions);
-  }, [questions, setQuestions]);
-
-  const onToggleRequired = useCallback(() => {
+  const onToggleRequired = () => {
     if (!question) return;
     const newQuestion = { ...question, required: !question.required };
     setQuestion(newQuestion);
-  }, [question, setQuestion]);
+  };
 
-  const onDelete = useCallback(() => {
+  const onDelete = () => {
     if (!question) return;
-    handleDeleteQuestion(question.id);
-  }, [question, handleDeleteQuestion]);
+    deleteQuestion(question.id);
+  };
 
   if (!question) {
     return null;

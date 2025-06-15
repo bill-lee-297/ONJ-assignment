@@ -1,4 +1,4 @@
-import Button from './Atoms/Button';
+import Button from '@/components/Atoms/Button';
 
 interface AlertModalProps {
   open: boolean;
@@ -10,7 +10,7 @@ interface AlertModalProps {
 const AlertModal = ({ open, message, onConfirm, onCancel }: AlertModalProps) => {
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.3)' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
       <div className="bg-white rounded-lg shadow-lg p-6 min-w-[280px] text-center">
         <div className="mb-4 text-lg">{message}</div>
         <div className="flex justify-center gap-4 mt-4">

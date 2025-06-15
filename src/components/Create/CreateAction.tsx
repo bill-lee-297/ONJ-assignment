@@ -1,9 +1,10 @@
-import Button from './Atoms/Button';
+import Button from '@/components/Atoms/Button';
 import { useCreateStore } from '@/store/createStore';
 import { useAlert } from '@/hooks/useAlert';
 import { useParams, useNavigate } from 'react-router';
 import type { Template } from '@/type/templates';
 import { v4 as uuidv4 } from 'uuid';
+import validateQuestions from '@/utils/validate';
 
 const CreateAction = () => {
   const showAlert = useAlert();
@@ -15,26 +16,13 @@ const CreateAction = () => {
   const description = useCreateStore(state => state.description);
   const questions = useCreateStore(state => state.questions);
 
-  const validate = async () => {
-    if (questions.length === 0) {
-      await showAlert('질문을 추가해주세요.', { cancel: false });
-      return false;
-    }
-    const optionCheck = questions
-      .filter(question => question.type === 'radio' || question.type === 'checkbox' || question.type === 'dropdown')
-      .some(question => question.options?.length === 0 || question.options?.some(option => option === ''));
-    if (optionCheck) {
-      await showAlert('옵션을 추가해주세요.', { cancel: false });
-      return false;
-    }
-    return true;
-  };
-
   const handleCreate = async (e: React.FormEvent, mode: 'create' | 'duplicate' = 'create') => {
     e.preventDefault();
 
-    if (!(await validate())) {
-      return;
+    const error = validateQuestions(questions);
+    if (error) {
+      await showAlert(error, { cancel: false });
+      return false;
     }
 
     if (mode === 'duplicate') {
@@ -58,7 +46,11 @@ const CreateAction = () => {
 
   const handleModify = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!(await validate())) return;
+    const error = validateQuestions(questions);
+    if (error) {
+      await showAlert(error, { cancel: false });
+      return false;
+    }
     const confirmed = await showAlert('이대로 수정하시겠습니까?', { cancel: true });
     if (!confirmed) return;
     const templates = JSON.parse(localStorage.getItem('templates') || '[]');

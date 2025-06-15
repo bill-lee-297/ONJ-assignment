@@ -1,5 +1,5 @@
 import { useOverlay } from '@toss/use-overlay';
-import AlertModal from '@/components/AlertModal';
+import AlertModal from '@/components/Molecules/AlertModal';
 
 interface ShowAlertOptions {
   cancel?: boolean;

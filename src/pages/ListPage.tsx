@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import type { Template } from '../type/templates';
-import Button from '../components/Atoms/Button';
-import getTemplates from '../service/getTemplates';
+import type { Template } from '@/type/templates';
+import Button from '@/components/Atoms/Button';
+import { getTemplates, deleteTemplate } from '@/service/templates';
 import Box from '@/components/Atoms/Box';
 import { useAlert } from '@/hooks/useAlert';
-import { useSearchStore } from '../store/searchStore';
+import { useSearchStore } from '@/store/searchStore';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
+import formatDate from '@/utils/date';
 
 const ListPage = () => {
   const searchKeyword = useSearchStore(state => state.searchKeyword);
@@ -16,15 +17,14 @@ const ListPage = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
 
-  const getTemplatesList = () => {
-    const templates = getTemplates('search', searchKeyword) as Template[];
-    setTemplates(templates);
-  };
+  const getTemplatesList = useCallback(() => {
+    setTemplates(getTemplates('search', searchKeyword) as Template[]);
+  }, [searchKeyword]);
 
   const handleDelete = async (id: string) => {
     const confirmed = await showAlert('삭제하시겠습니까?', { cancel: true });
     if (!confirmed) return;
-    getTemplates('delete', id);
+    deleteTemplate(id);
     getTemplatesList();
   };
 
@@ -38,11 +38,11 @@ const ListPage = () => {
         getTemplatesList();
       });
     };
-  }, []);
+  }, [getTemplatesList]);
 
   useEffect(() => {
     getTemplatesList();
-  }, [searchKeyword]);
+  }, [searchKeyword, getTemplatesList]);
 
   return (
     <div>
@@ -53,16 +53,7 @@ const ListPage = () => {
             <ContentTitle>{tpl.title}</ContentTitle>
             <ContentDesc>{tpl.description}</ContentDesc>
             <div className="text-sm text-gray-500">
-              생성일:{' '}
-              {new Date(tpl.createdAt).toLocaleDateString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-              })}
+              생성일: {formatDate(tpl.createdAt)}
             </div>
             <div className="mt-4 flex gap-2" onClick={e => e.stopPropagation()}>
               <Button onClick={() => navigate(`/edit/${tpl.id}`)}>수정</Button>

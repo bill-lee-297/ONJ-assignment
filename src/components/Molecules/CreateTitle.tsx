@@ -1,5 +1,5 @@
 import { useCreateStore } from '@/store/createStore';
-import Box from '../Atoms/Box';
+import Box from '@/components/Atoms/Box';
 
 const CreateTitle = () => {
   const title = useCreateStore(state => state.title);

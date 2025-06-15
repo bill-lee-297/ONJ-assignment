@@ -10,6 +10,4 @@ const OptionInput = memo(({ ...props }: React.InputHTMLAttributes<HTMLInputEleme
   );
 });
 
-OptionInput.displayName = 'OptionInput';
-
 export default OptionInput; 

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { TemplateQuestion } from '@/type/templates';
-import { updatePreviewTemplate } from '@/utils/localStorage';
+import { updatePreviewTemplate } from '@/service/preview';
 
 interface CreateState {
   title: string;
@@ -10,6 +10,7 @@ interface CreateState {
   questions: TemplateQuestion[];
   setQuestions: (questions: TemplateQuestion[]) => void;
   setQuestion: (question: TemplateQuestion) => void;
+  deleteQuestion: (questionId: string) => void;
 }
 
 export const useCreateStore = create<CreateState>((set, get) => ({
@@ -32,6 +33,12 @@ export const useCreateStore = create<CreateState>((set, get) => ({
   setQuestion: question => {
     const questions = get().questions;
     const newQuestions = questions.map(item => item.id === question.id ? question : item);
+    set({ questions: newQuestions });
+    updatePreviewTemplate({ questions: newQuestions });
+  },
+  deleteQuestion: questionId => {
+    const questions = get().questions;
+    const newQuestions = questions.filter(question => question.id !== questionId);
     set({ questions: newQuestions });
     updatePreviewTemplate({ questions: newQuestions });
   }

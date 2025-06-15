@@ -3,7 +3,7 @@ import React from 'react';
 interface ButtonProps {
   children: React.ReactNode;
   className?: string;
-  onClick?: (e: React.FormEvent) => void | Promise<void>;
+  onClick?: (e: React.FormEvent) => void | Promise<boolean | void>;
   type?: 'button' | 'submit' | 'reset';
 }
 

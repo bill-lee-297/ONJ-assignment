@@ -1,10 +1,10 @@
-import useTemplates from '../service/getTemplates';
+import { getTemplates } from '@/service/templates';
 import { useParams } from 'react-router';
-import Box from '../components/Atoms/Box';
+import Box from '@/components/Atoms/Box';
 import Button from '@/components/Atoms/Button';
 import { useNavigate } from 'react-router';
-import type { Template, TemplateQuestion } from '../type/templates';
-import DetailQuestionOptions from '@/components/Molecules/DetailQuestionOptions';
+import type { Template, TemplateQuestion } from '@/type/templates';
+import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
@@ -12,7 +12,7 @@ import ContentDesc from '@/components/Atoms/ContentDesc';
 const DetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const filteredTemplates = useTemplates('detail', id || '') as Template;
+  const filteredTemplates = getTemplates('detail', id || '') as Template;
 
   if (!filteredTemplates) {
     return <div>템플릿을 찾을 수 없습니다.</div>;

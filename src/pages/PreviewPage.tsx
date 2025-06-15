@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import Box from '../components/Atoms/Box';
-import type { Template, TemplateQuestion } from '../type/templates';
-import DetailQuestionOptions from '@/components/Molecules/DetailQuestionOptions';
+import Box from '@/components/Atoms/Box';
+import type { Template, TemplateQuestion } from '@/type/templates';
+import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
-import { getPreviewTemplate } from '@/utils/localStorage';
+import { getPreviewTemplate } from '@/service/preview';
 
 const PreviewPage = () => {
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null);
@@ -18,7 +18,9 @@ const PreviewPage = () => {
     });
 
     return () => {
-      window.removeEventListener('storage', () => {});
+      window.removeEventListener('storage', () => {
+        setPreviewTemplate(getPreviewTemplate() as Template);
+      });
     };
   }, []);
 

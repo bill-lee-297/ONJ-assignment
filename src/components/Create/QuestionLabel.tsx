@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { useCreateStore } from '@/store/createStore';
 import type { TemplateQuestion } from '@/type/templates';
 
@@ -10,7 +10,7 @@ interface QuestionLabelProps {
 const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
   const setQuestion = useCreateStore(state => state.setQuestion);
 
-  const onValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
     if (!question) return;
     
     if (key === 'label') {
@@ -30,7 +30,7 @@ const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
         setQuestion(newQuestion);
       }
     }
-  }, [question, setQuestion]);
+  };
 
   return (
     <div key={question.id} className="flex items-center gap-5">

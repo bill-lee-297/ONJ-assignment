@@ -2,7 +2,7 @@ import type { Template } from '@/type/templates';
 
 type PreviewTemplate = Partial<Template>;
 
-export const getPreviewTemplate = (): PreviewTemplate => {
+const getPreviewTemplate = (): PreviewTemplate => {
   try {
     const stored = localStorage.getItem('previewTemplate');
     return stored ? JSON.parse(stored) : {};
@@ -12,7 +12,7 @@ export const getPreviewTemplate = (): PreviewTemplate => {
   }
 };
 
-export const updatePreviewTemplate = (updates: PreviewTemplate) => {
+const updatePreviewTemplate = (updates: PreviewTemplate) => {
   const currentTemplate = getPreviewTemplate();
   const newTemplate = {
     ...currentTemplate,
@@ -23,4 +23,6 @@ export const updatePreviewTemplate = (updates: PreviewTemplate) => {
   } catch (error) {
     console.error('Failed to save previewTemplate to localStorage:', error);
   }
-}; 
+};
+
+export { getPreviewTemplate, updatePreviewTemplate };

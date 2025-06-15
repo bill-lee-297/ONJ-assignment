@@ -1,7 +1,7 @@
 import { useCreateStore } from '@/store/createStore';
-import QuestionLabel from './Molecules/QuestionLabel';
-import QuestionContent from './Molecules/QuestionContents';
-import QuestionToolbar from './Molecules/QuestionToolbar';
+import QuestionLabel from './QuestionLabel';
+import QuestionContent from './QuestionContents';
+import QuestionToolbar from './QuestionToolbar';
 import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { IoMdAdd } from 'react-icons/io';

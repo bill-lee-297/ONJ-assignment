@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import type { Template } from '../type/templates';
+import type { Template } from '@/type/templates';
 import { useParams } from 'react-router';
-import CreateTitle from '../components/Molecules/CreateTitle';
+import CreateTitle from '@/components/Molecules/CreateTitle';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import { useCreateStore } from '@/store/createStore';
-import CreateQuestion from '@/components/CreateQuestion';
-import CreateAction from '@/components/CreateAction';
+import CreateQuestion from '@/components/Create/CreateQuestion';
+import CreateAction from '@/components/Create/CreateAction';
 
 const CreatePage = () => {
   const { id } = useParams();
@@ -25,8 +25,12 @@ const CreatePage = () => {
         setDescription(template.description);
         setQuestions(template.questions);
       }
+    } else {
+      setTitle('');
+      setDescription('');
+      setQuestions([]);
     }
-  }, [id, isEdit]);
+  }, [id, isEdit, setTitle, setDescription, setQuestions]);
 
   return (
     <div className="h-full w-full flex flex-col justify-center">
