@@ -13,16 +13,16 @@ const CreateAction = () => {
 
   const title = useCreateStore(state => state.title);
   const description = useCreateStore(state => state.description);
-  const fields = useCreateStore(state => state.fields);
+  const questions = useCreateStore(state => state.questions);
 
   const validate = async () => {
-    if (fields.length === 0) {
+    if (questions.length === 0) {
       await showAlert('질문을 추가해주세요.', { cancel: false });
       return false;
     }
-    const optionCheck = fields
-      .filter(field => field.type === 'radio' || field.type === 'checkbox' || field.type === 'dropdown')
-      .some(field => field.options?.length === 0 || field.options?.some(option => option === ''));
+    const optionCheck = questions
+      .filter(question => question.type === 'radio' || question.type === 'checkbox' || question.type === 'dropdown')
+      .some(question => question.options?.length === 0 || question.options?.some(option => option === ''));
     if (optionCheck) {
       await showAlert('옵션을 추가해주세요.', { cancel: false });
       return false;
@@ -47,7 +47,7 @@ const CreateAction = () => {
       id: `tpl-${uuidv4()}`,
       title,
       description,
-      fields,
+      questions,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -63,7 +63,7 @@ const CreateAction = () => {
     if (!confirmed) return;
     const templates = JSON.parse(localStorage.getItem('templates') || '[]');
     const updatedTemplates = templates.map((tpl: Template) =>
-      tpl.id === id ? { ...tpl, title, description, fields, updatedAt: new Date().toISOString() } : tpl,
+      tpl.id === id ? { ...tpl, title, description, questions, updatedAt: new Date().toISOString() } : tpl,
     );
     localStorage.setItem('templates', JSON.stringify(updatedTemplates));
     navigate('/');

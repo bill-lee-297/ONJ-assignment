@@ -1,28 +1,11 @@
 import { memo } from 'react';
-import { useCreateStore } from '@/store/createStore';
-import type { TemplateField } from '@/type/templates';
 
-interface OptionInputProps {
-  field: TemplateField;
-  index: number;
-  value: string;
-}
-
-const OptionInput = memo(({ field, index, value }: OptionInputProps) => {
-  const setField = useCreateStore(state => state.setField);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newOptions = [...(field.options || [])];
-    newOptions[index] = e.target.value;
-    setField({ ...field, options: newOptions });
-  };
-
+const OptionInput = memo(({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <input
       type="text"
-      className="text-sm h-8 hover:outline-1 hover:outline-gray-300 rounded"
-      value={value}
-      onChange={onChange}
+      className={`text-sm h-8 rounded ${props.className}`}
+      {...props}
     />
   );
 });

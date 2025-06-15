@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { TemplateField } from '@/type/templates';
+import type { TemplateQuestion } from '@/type/templates';
 import { updatePreviewTemplate } from '@/utils/localStorage';
 
 interface CreateState {
@@ -7,9 +7,9 @@ interface CreateState {
   setTitle: (title: string) => void;
   description: string;
   setDescription: (description: string) => void;
-  fields: TemplateField[];
-  setFields: (fields: TemplateField[]) => void;
-  setField: (field: TemplateField) => void;
+  questions: TemplateQuestion[];
+  setQuestions: (questions: TemplateQuestion[]) => void;
+  setQuestion: (question: TemplateQuestion) => void;
 }
 
 export const useCreateStore = create<CreateState>((set, get) => ({
@@ -23,16 +23,16 @@ export const useCreateStore = create<CreateState>((set, get) => ({
     set({ description });
     updatePreviewTemplate({ description });
   },
-  fields: [],
-  setFields: fields => {
-    const newFields = [...fields];
-    set({ fields: newFields });
-    updatePreviewTemplate({ fields: newFields });
+  questions: [],
+  setQuestions: questions => {
+    const newQuestions = [...questions];
+    set({ questions: newQuestions });
+    updatePreviewTemplate({ questions: newQuestions });
   },
-  setField: field => {
-    const fields = get().fields;
-    const newFields = fields.map(item => item.id === field.id ? field : item);
-    set({ fields: newFields });
-    updatePreviewTemplate({ fields: newFields });
+  setQuestion: question => {
+    const questions = get().questions;
+    const newQuestions = questions.map(item => item.id === question.id ? question : item);
+    set({ questions: newQuestions });
+    updatePreviewTemplate({ questions: newQuestions });
   }
 }));

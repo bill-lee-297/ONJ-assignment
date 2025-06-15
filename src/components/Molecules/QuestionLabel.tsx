@@ -1,43 +1,43 @@
 import React, { memo, useCallback } from 'react';
 import { useCreateStore } from '@/store/createStore';
-import type { TemplateField } from '@/type/templates';
+import type { TemplateQuestion } from '@/type/templates';
 
 
-interface FieldLabelProps {
-  field: TemplateField;
+interface QuestionLabelProps {
+  question: TemplateQuestion;
 }
 
-const FieldLabel = memo(({ field }: FieldLabelProps) => {
-  const setField = useCreateStore(state => state.setField);
+const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
+  const setQuestion = useCreateStore(state => state.setQuestion);
 
   const onValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
-    if (!field) return;
+    if (!question) return;
     
     if (key === 'label') {
-      const newField = { ...field, label: e.target.value };
-      setField(newField);
+      const newQuestion = { ...question, label: e.target.value };
+      setQuestion(newQuestion);
     } else if (key === 'options') {
       const type = e.target.value as 'radio' | 'text' | 'checkbox' | 'dropdown';
       if (type === 'radio' || type === 'checkbox' || type === 'dropdown') {
-        const newField = { ...field, type, options: [] };
-        setField(newField);
+        const newQuestion = { ...question, type, options: [] };
+        setQuestion(newQuestion);
       } else {
-        const newField = { 
-          id: field.id,
+        const newQuestion = { 
+          id: question.id,
           type,
-          label: field.label,
+          label: question.label,
         };
-        setField(newField);
+        setQuestion(newQuestion);
       }
     }
-  }, [field, setField]);
+  }, [question, setQuestion]);
 
   return (
-    <div key={field.id} className="flex items-center gap-5">
+    <div key={question.id} className="flex items-center gap-5">
       <div className="flex-7">
         <input
           type="text"
-          value={field.label}
+          value={question.label}
           onChange={e => onValueChange(e, 'label')}
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
           placeholder={`질문`}
@@ -46,7 +46,7 @@ const FieldLabel = memo(({ field }: FieldLabelProps) => {
       <div className="flex-3">
         <select
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          value={field.type}
+          value={question.type}
           onChange={e => onValueChange(e, 'options')}
         >
           <option value="radio">객관식</option>
@@ -59,4 +59,4 @@ const FieldLabel = memo(({ field }: FieldLabelProps) => {
   );
 });
 
-export default FieldLabel;
+export default QuestionLabel; 

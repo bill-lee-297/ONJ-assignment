@@ -2,12 +2,12 @@ import { useState } from 'react';
 import OptionsRow from '../Atoms/OptionsRow';
 import CheckInput from '../Atoms/CheckInput';
 
-interface DetailFieldOptionsProps {
+interface DetailQuestionOptionsProps {
   type: string;
   options: string[];
 }
 
-const DetailFieldOptions = ({ type, options }: DetailFieldOptionsProps) => {
+const DetailQuestionOptions = ({ type, options }: DetailQuestionOptionsProps) => {
   const [text, setText] = useState<string>('');
   const [selectedRadio, setSelectedRadio] = useState<number>();
   const [selectedCheckbox, setSelectedCheckbox] = useState<number[]>([]);
@@ -63,4 +63,4 @@ const DetailFieldOptions = ({ type, options }: DetailFieldOptionsProps) => {
   );
 };
 
-export default DetailFieldOptions;
+export default DetailQuestionOptions;

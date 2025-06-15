@@ -1,8 +1,8 @@
-export type TemplateFieldType = 'text' | 'checkbox' | 'dropdown' | 'radio';
+export type TemplateQuestionType = 'text' | 'checkbox' | 'dropdown' | 'radio';
 
-export interface TemplateField {
+export interface TemplateQuestion {
   id: string;
-  type: TemplateFieldType;
+  type: TemplateQuestionType;
   label: string;
   options?: string[];
   required?: boolean;
@@ -14,11 +14,11 @@ export interface Template {
   description: string;
   createdAt: string;
   updatedAt: string;
-  fields: TemplateField[];
+  questions: TemplateQuestion[];
 }
 
 export interface TemplateQuestionProps {
-  fields: TemplateField[];
+  questions: TemplateQuestion[];
   idx: number;
-  setFields: (fields: TemplateField[]) => void;
+  setQuestions: (questions: TemplateQuestion[]) => void;
 }

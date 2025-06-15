@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import CreateTitle from '../components/Molecules/CreateTitle';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import { useCreateStore } from '@/store/createStore';
-import CreateField from '@/components/CreateField';
+import CreateQuestion from '@/components/CreateQuestion';
 import CreateAction from '@/components/CreateAction';
 
 const CreatePage = () => {
@@ -12,7 +12,7 @@ const CreatePage = () => {
 
   const setTitle = useCreateStore(state => state.setTitle);
   const setDescription = useCreateStore(state => state.setDescription);
-  const setFields = useCreateStore(state => state.setFields);
+  const setQuestions = useCreateStore(state => state.setQuestions);
 
   const isEdit = Boolean(id);
 
@@ -23,7 +23,7 @@ const CreatePage = () => {
       if (template) {
         setTitle(template.title);
         setDescription(template.description);
-        setFields(template.fields);
+        setQuestions(template.questions);
       }
     }
   }, [id, isEdit]);
@@ -37,7 +37,7 @@ const CreatePage = () => {
 
       <form className="flex flex-col gap-4 w-full mx-auto">
         <CreateTitle />
-        <CreateField />
+        <CreateQuestion />
       </form>
     </div>
   );

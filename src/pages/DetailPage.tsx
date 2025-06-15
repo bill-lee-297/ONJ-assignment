@@ -3,8 +3,8 @@ import { useParams } from 'react-router';
 import Box from '../components/Atoms/Box';
 import Button from '@/components/Atoms/Button';
 import { useNavigate } from 'react-router';
-import type { Template, TemplateField } from '../type/templates';
-import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
+import type { Template, TemplateQuestion } from '../type/templates';
+import DetailQuestionOptions from '@/components/Molecules/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
@@ -33,13 +33,13 @@ const DetailPage = () => {
         <ContentDesc>{filteredTemplates.description || ''}</ContentDesc>
       </Box>
       <div className="flex flex-col gap-2">
-        {filteredTemplates.fields.map((field: TemplateField) => (
-          <Box key={field.id}>
+        {filteredTemplates.questions.map((question: TemplateQuestion) => (
+          <Box key={question.id}>
             <div className="text-gray-500">
-              {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {question.label}
+              {question.required && <span className="text-red-500 ml-1">*</span>}
             </div>
-            <DetailFieldOptions type={field.type} options={field.options || []} />
+            <DetailQuestionOptions type={question.type} options={question.options || []} />
           </Box>
         ))}
       </div>

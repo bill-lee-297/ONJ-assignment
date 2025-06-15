@@ -1,7 +1,7 @@
-import type { TemplateFieldType } from '@/type/templates';
+import type { TemplateQuestionType } from '@/type/templates';
 
 interface InputProps {
-  type: TemplateFieldType;
+  type: TemplateQuestionType;
   className?: string;
   checked?: boolean;
   value?: string | number;

@@ -1,4 +1,4 @@
-import type { TemplateFieldType, TemplateField } from '../../type/templates';
+import type { TemplateQuestionType, TemplateQuestion } from '../../type/templates';
 import { IoMdClose } from 'react-icons/io';
 import OptionsRow from '../Atoms/OptionsRow';
 import CheckInput from '../Atoms/CheckInput';
@@ -7,59 +7,58 @@ import { memo } from 'react';
 import OptionInput from '../Atoms/OptionInput';
 
 interface OptionProps {
-  field: TemplateField;
-  type: TemplateFieldType;
+  question: TemplateQuestion;
+  type: TemplateQuestionType;
 }
 
-const Option = memo(({ field, type }: OptionProps) => {
-  const setField = useCreateStore(state => state.setField);
+const Option = memo(({ question, type }: OptionProps) => {
+  const setQuestion = useCreateStore(state => state.setQuestion);
 
   const onAddOption = () =>{
-    if (!field) return;
-    const options = field.options;
+    if (!question) return;
+    const options = question.options;
     const addIdx = options?.length ? options.length + 1 : 1;
     const newOptions = options ? [...options, `옵션 ${addIdx}`] : [`옵션 ${addIdx}`];
 
-    const newField = { ...field, options: newOptions };
-    setField(newField);
+    const newQuestion = { ...question, options: newOptions };
+    setQuestion(newQuestion);
   };
 
   const onDeleteOption = (index: number) => {
-    if (!field) return;
-    const options = field.options;
+    if (!question) return;
+    const options = question.options;
     const newOptions = options ? options.filter((_, i) => i !== index) : [];
 
-    const newField = { ...field, options: newOptions };
-    setField(newField);
+    const newQuestion = { ...question, options: newOptions };
+    setQuestion(newQuestion);
   };
 
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    if (!field) return;
-    const newOptions = [...(field.options || [])];
+    if (!question) return;
+    const newOptions = [...(question.options || [])];
     newOptions[index] = e.target.value;
-    setField({ ...field, options: newOptions });
+    setQuestion({ ...question, options: newOptions });
   };
 
-  if (!field) {
+  if (!question) {
     return null;
   }
 
-  const options = field.options;
+  const options = question.options;
 
   return (
     <div className="text-md text-gray-500 px-2 py-2 w-full">
       <div className="addOptions flex flex-col gap-4">
         {options?.map((option, index) => (
-          <div key={`${field.id}-option-${index}`} className="flex justify-between items-center h-8">
+          <div key={`${question.id}-option-${index}`} className="flex justify-between items-center h-8">
             <OptionsRow>
               {(type === 'radio' || type === 'checkbox') && <CheckInput type={type} checked={false} />}
               {type === 'dropdown' && <div>{index + 1}</div>}
-              <input
-                key={`${field.id}-option-${index}-input`}
-                type="text"
-                className="text-sm h-8 hover:outline-1 hover:outline-gray-300 rounded"
-                value={option}
-                onChange={e => onOptionChange(e, index)}
+              <OptionInput 
+                key={`${question.id}-option-${index}`} 
+                className="hover:outline-1 hover:outline-gray-300 rounded" 
+                value={option} 
+                onChange={e => onOptionChange(e, index)} 
               />
             </OptionsRow>
             <button type="button" onClick={() => onDeleteOption(index)} className="cursor-pointer">
@@ -71,10 +70,9 @@ const Option = memo(({ field, type }: OptionProps) => {
       <OptionsRow className="mt-4">
         {(type === 'radio' || type === 'checkbox') && <CheckInput type={type} checked={false} />}
         {type === 'dropdown' && <div>{options?.length ? options?.length + 1 : 1}</div>}
-
-        <input
-          type="text"
-          className="text-sm h-8 cursor-pointer"
+        
+        <OptionInput
+          className="cursor-pointer"
           placeholder="옵션 추가"
           onClick={onAddOption}
           readOnly
