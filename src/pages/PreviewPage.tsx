@@ -5,16 +5,16 @@ import DetailFieldOptions from '@/components/Molecules/DetailFieldOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
+import { getPreviewTemplate } from '@/utils/localStorage';
 
 const PreviewPage = () => {
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null);
 
   useEffect(() => {
-    setPreviewTemplate(JSON.parse(localStorage.getItem('previewTemplate') || '{}') as Template);
+    setPreviewTemplate(getPreviewTemplate() as Template);
 
-    window.addEventListener('storage', e => {
-      const previewTemplate = JSON.parse(e.newValue || '{}') as Template;
-      setPreviewTemplate(previewTemplate);
+    window.addEventListener('storage', () => {
+      setPreviewTemplate(getPreviewTemplate() as Template);
     });
 
     return () => {

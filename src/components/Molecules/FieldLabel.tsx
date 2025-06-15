@@ -1,30 +1,43 @@
-import type { TemplateQuestionProps } from '../../type/templates';
+import React, { memo, useCallback } from 'react';
+import { useCreateStore } from '@/store/createStore';
+import type { TemplateField } from '@/type/templates';
 
 
-const FieldLabel = ({ idx, fields, setFields }: TemplateQuestionProps) => {
+interface FieldLabelProps {
+  field: TemplateField;
+}
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
-    const newFields = [...fields];
+const FieldLabel = memo(({ field }: FieldLabelProps) => {
+  const setField = useCreateStore(state => state.setField);
+
+  const onValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
+    if (!field) return;
+    
     if (key === 'label') {
-      newFields[idx] = { ...newFields[idx], [key]: e.target.value };
+      const newField = { ...field, label: e.target.value };
+      setField(newField);
     } else if (key === 'options') {
       const type = e.target.value as 'radio' | 'text' | 'checkbox' | 'dropdown';
-      if(type === 'radio' || type === 'checkbox' || type === 'dropdown') {
-        newFields[idx] = { ...newFields[idx], type: type, options: [] };
+      if (type === 'radio' || type === 'checkbox' || type === 'dropdown') {
+        const newField = { ...field, type, options: [] };
+        setField(newField);
       } else {
-        delete newFields[idx].options;
-        newFields[idx] = { ...newFields[idx], type: type };
+        const newField = { 
+          id: field.id,
+          type,
+          label: field.label,
+        };
+        setField(newField);
       }
     }
-    setFields(newFields);
-  }
+  }, [field, setField]);
 
   return (
-    <div key={fields[idx].id} className="flex items-center gap-5">
+    <div key={field.id} className="flex items-center gap-5">
       <div className="flex-7">
         <input
           type="text"
-          value={fields[idx].label}
+          value={field.label}
           onChange={e => onValueChange(e, 'label')}
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
           placeholder={`질문`}
@@ -33,7 +46,7 @@ const FieldLabel = ({ idx, fields, setFields }: TemplateQuestionProps) => {
       <div className="flex-3">
         <select
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          value={fields[idx].type}
+          value={field.type}
           onChange={e => onValueChange(e, 'options')}
         >
           <option value="radio">객관식</option>
@@ -44,6 +57,6 @@ const FieldLabel = ({ idx, fields, setFields }: TemplateQuestionProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default FieldLabel;

@@ -3,23 +3,18 @@ import type { Template } from '../type/templates';
 const getTemplates = (type: 'search' | 'detail' | 'delete', text: string): Template[] | Template | null => {
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
 
-  if(type === 'search') {
+  if (type === 'search') {
     return templates
-      .filter((tpl: Template) =>
-        tpl.title.toLowerCase().includes(text)
-      )
-      .sort(
-        (a: Template, b: Template) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+      .filter((tpl: Template) => tpl.title.toLowerCase().includes(text))
+      .sort((a: Template, b: Template) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
-  if(type === 'detail') {
+  if (type === 'detail') {
     const template = templates.find((tpl: Template) => tpl.id === text);
     return template ? template : null;
   }
 
-  if(type === 'delete') {
+  if (type === 'delete') {
     const newTemplates = templates.filter((tpl: Template) => tpl.id !== text);
     localStorage.setItem('templates', JSON.stringify(newTemplates));
   }
@@ -27,4 +22,4 @@ const getTemplates = (type: 'search' | 'detail' | 'delete', text: string): Templ
   return [];
 };
 
-export default getTemplates; 
+export default getTemplates;

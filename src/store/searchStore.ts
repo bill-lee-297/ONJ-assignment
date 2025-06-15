@@ -5,7 +5,7 @@ interface SearchState {
   setSearchKeyword: (keyword: string) => void;
 }
 
-export const useSearchStore = create<SearchState>((set) => ({
+export const useSearchStore = create<SearchState>(set => ({
   searchKeyword: '',
-  setSearchKeyword: (keyword) => set({ searchKeyword: keyword }),
-})); 
+  setSearchKeyword: keyword => set({ searchKeyword: keyword }),
+}));

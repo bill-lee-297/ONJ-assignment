@@ -1,32 +1,30 @@
-import TitleInput from "../Atoms/TitleInput";
-import DescriptionInput from "../Atoms/DescriptionInput";
+import { useCreateStore } from '@/store/createStore';
+import Box from '../Atoms/Box';
 
+const CreateTitle = () => {
+  const title = useCreateStore(state => state.title);
+  const setTitle = useCreateStore(state => state.setTitle);
+  const description = useCreateStore(state => state.description);
+  const setDescription = useCreateStore(state => state.setDescription);
 
-interface CreateTitleProps {
-  title: string;
-  description: string;
-  setTitle: (title: string) => void;
-  setDescription: (description: string) => void
-}
-
-const CreateTitle = ({ title, description, setTitle, setDescription }: CreateTitleProps) => {
   return (
-    <div className="flex flex-col gap-4 border border-gray-300 rounded px-4 py-5">
-      <TitleInput
+    <Box className="pb-6 gap-4">
+      <input
+        type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
+        onChange={e => setTitle(e.target.value)}
+        className="w-full text-xl border-b-2 border-gray-300 px-3 py-2 focus:border-gray-500"
         placeholder="템플릿 제목을 입력하세요"
-        id="template-title"
+        required
       />
-      <DescriptionInput
+      <textarea
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={e => setDescription(e.target.value)}
+        className="w-full text-md border-b border-gray-300 px-3 py-2"
         placeholder="템플릿 설명"
         rows={1}
-        id="template-description"
       />
-    </div>
+    </Box>
   );
 };
 
