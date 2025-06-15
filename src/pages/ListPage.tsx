@@ -4,7 +4,7 @@ import type { Template } from '@/type/templates';
 import Button from '@/components/Atoms/Button';
 import { getTemplates, deleteTemplate } from '@/service/templates';
 import Box from '@/components/Atoms/Box';
-import { useAlert } from '@/hooks/useAlert';
+import useAlert from '@/hooks/useAlert';
 import { useSearchStore } from '@/store/searchStore';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';

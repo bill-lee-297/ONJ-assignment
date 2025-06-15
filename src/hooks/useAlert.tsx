@@ -5,7 +5,7 @@ interface ShowAlertOptions {
   cancel?: boolean;
 }
 
-export function useAlert() {
+const useAlert = () => {
   const overlay = useOverlay();
 
   const showAlert = (message: string, options?: ShowAlertOptions): Promise<boolean> => {
@@ -32,4 +32,6 @@ export function useAlert() {
   };
 
   return showAlert;
-}
+};
+
+export default useAlert;

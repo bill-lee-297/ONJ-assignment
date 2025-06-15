@@ -6,6 +6,7 @@ import MenuTitle from '@/components/Atoms/MenuTitle';
 import { useCreateStore } from '@/store/createStore';
 import CreateQuestion from '@/components/Create/CreateQuestion';
 import CreateAction from '@/components/Create/CreateAction';
+import { getAllTemplates } from '@/service/templates';
 
 const CreatePage = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const CreatePage = () => {
 
   useEffect(() => {
     if (isEdit) {
-      const templates = JSON.parse(localStorage.getItem('templates') || '[]');
+      const templates = getAllTemplates();
       const template = templates.find((tpl: Template) => tpl.id === id);
       if (template) {
         setTitle(template.title);

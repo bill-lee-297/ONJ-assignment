@@ -1,7 +1,15 @@
 import type { Template } from '@/type/templates';
 
-const getTemplates = (type: 'search' | 'detail', text: string): Template[] | Template | null => {
+const getAllTemplates = () => {
+  return JSON.parse(localStorage.getItem('templates') || '[]');
+};
+
+const getTemplates = (type: 'all' | 'search' | 'detail', text: string): Template[] | Template | null => {
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
+
+  if (type === 'all') {
+    return templates.sort((a: Template, b: Template) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
 
   if (type === 'search') {
     return templates
@@ -17,10 +25,14 @@ const getTemplates = (type: 'search' | 'detail', text: string): Template[] | Tem
   return [];
 };
 
+const saveTemplate = (templates: Template[]) => {
+  localStorage.setItem('templates', JSON.stringify(templates));
+};
+
 const deleteTemplate = (id: string) => {
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
   const newTemplates = templates.filter((tpl: Template) => tpl.id !== id);
   localStorage.setItem('templates', JSON.stringify(newTemplates));
 };
 
-export { getTemplates, deleteTemplate };
+export { getAllTemplates, getTemplates, saveTemplate, deleteTemplate };

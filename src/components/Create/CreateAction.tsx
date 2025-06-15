@@ -1,10 +1,11 @@
 import Button from '@/components/Atoms/Button';
 import { useCreateStore } from '@/store/createStore';
-import { useAlert } from '@/hooks/useAlert';
+import useAlert from '@/hooks/useAlert';
 import { useParams, useNavigate } from 'react-router';
 import type { Template } from '@/type/templates';
 import { v4 as uuidv4 } from 'uuid';
 import validateQuestions from '@/utils/validate';
+import { getAllTemplates, saveTemplate } from '@/service/templates';
 
 const CreateAction = () => {
   const showAlert = useAlert();
@@ -30,7 +31,7 @@ const CreateAction = () => {
       if (!confirmed) return;
     }
 
-    const templates = localStorage.getItem('templates');
+    const templates = getAllTemplates();
     const newTemplate: Template = {
       id: `tpl-${uuidv4()}`,
       title,
@@ -40,7 +41,7 @@ const CreateAction = () => {
       updatedAt: new Date().toISOString(),
     };
     const newTemplates = templates ? [...JSON.parse(templates), newTemplate] : [newTemplate];
-    localStorage.setItem('templates', JSON.stringify(newTemplates));
+    saveTemplate(newTemplates);
     navigate('/');
   };
 
@@ -53,11 +54,11 @@ const CreateAction = () => {
     }
     const confirmed = await showAlert('이대로 수정하시겠습니까?', { cancel: true });
     if (!confirmed) return;
-    const templates = JSON.parse(localStorage.getItem('templates') || '[]');
+    const templates = getAllTemplates();
     const updatedTemplates = templates.map((tpl: Template) =>
       tpl.id === id ? { ...tpl, title, description, questions, updatedAt: new Date().toISOString() } : tpl,
     );
-    localStorage.setItem('templates', JSON.stringify(updatedTemplates));
+    saveTemplate(updatedTemplates);
     navigate('/');
   };
 
