@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import Search from './Molecules/Search';
-import Button from './Atoms/Button';
+import IconButton from './Atoms/IconButton';
+import { IoEyeOutline } from "react-icons/io5";
 
 const Header = () => {
   const location = useLocation();
@@ -26,7 +27,12 @@ const Header = () => {
         </nav>
         <div className="w-full flex flex-row items-center justify-end">
           {isHome && <Search />}
-          {isCreate && <Button onClick={handlePreview}>미리보기</Button>}
+          {isCreate && (
+            <IconButton onClick={handlePreview}>
+              <IoEyeOutline size={20} />
+              미리보기
+            </IconButton>
+          )}
         </div>
       </div>
     </header>

@@ -8,6 +8,8 @@ import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
+import { MdOutlineEdit } from "react-icons/md";
+import IconButton from '@/components/Atoms/IconButton';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -26,7 +28,9 @@ const DetailPage = () => {
     <div>
       <div className="flex flex-row items-center justify-between mb-6">
         <MenuTitle>템플릿 상세보기</MenuTitle>
-        <Button onClick={handleEdit}>수정</Button>
+        <IconButton onClick={handleEdit}>
+          <MdOutlineEdit size={20} />
+        </IconButton>
       </div>
       <Box>
         <ContentTitle>{filteredTemplates.title || ''}</ContentTitle>

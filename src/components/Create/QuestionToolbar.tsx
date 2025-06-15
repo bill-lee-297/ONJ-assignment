@@ -3,6 +3,7 @@ import type { TemplateQuestion } from '@/type/templates';
 import ToggleButton from '@/components/Atoms/ToggleButton';
 import { useCreateStore } from '@/store/createStore';
 import { memo } from 'react';
+import IconButton from '@/components/Atoms/IconButton';
 
 interface QuestionToolbarProps {
   question: TemplateQuestion;
@@ -29,9 +30,12 @@ const QuestionToolbar = memo(({ question }: QuestionToolbarProps) => {
 
   return (
     <div className="flex justify-end items-center border-t border-gray-300 pt-2 mt-4">
-      <button onClick={onDelete} className="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
-        <MdDeleteOutline size={24} className="text-gray-500 hover:text-gray-900 transition" />
-      </button>
+      <IconButton 
+        onClick={onDelete} 
+        className="p-2 hover:bg-gray-100 rounded-full cursor-pointer"
+      >
+        <MdDeleteOutline size={24} />
+      </IconButton>
 
       <hr className="h-4 border-l border-gray-300 mx-1" />
 

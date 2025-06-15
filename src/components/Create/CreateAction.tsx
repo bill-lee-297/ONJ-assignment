@@ -1,4 +1,3 @@
-import Button from '@/components/Atoms/Button';
 import { useCreateStore } from '@/store/createStore';
 import useAlert from '@/hooks/useAlert';
 import { useParams, useNavigate } from 'react-router';
@@ -6,6 +5,9 @@ import type { Template } from '@/type/templates';
 import { v4 as uuidv4 } from 'uuid';
 import validateQuestions from '@/utils/validate';
 import { getAllTemplates, saveTemplate } from '@/service/templates';
+import { IoDuplicateSharp } from "react-icons/io5";
+import { FaRegSave } from 'react-icons/fa';
+import IconButton from '@/components/Atoms/IconButton';
 
 const CreateAction = () => {
   const showAlert = useAlert();
@@ -63,13 +65,19 @@ const CreateAction = () => {
   };
 
   return isEdit ? (
-    <div className="flex items-center justify-between gap-5">
-      <Button onClick={e => handleCreate(e, 'duplicate')}>새로운 템플릿으로 생성</Button>
-      <Button onClick={handleModify}>저장</Button>
+    <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+      <IconButton onClick={e => handleCreate(e, 'duplicate')}>
+        <IoDuplicateSharp size={20} />
+      </IconButton>
+      <IconButton onClick={handleModify}>
+        <FaRegSave size={20} />
+      </IconButton>
     </div>
   ) : (
-    <div className="flex items-center justify-end gap-5">
-      <Button onClick={handleCreate}>저장</Button>
+    <div className="flex items-center justify-end gap-3">
+      <IconButton onClick={handleCreate}>
+        <FaRegSave size={20} />
+      </IconButton>
     </div>
   );
 };
