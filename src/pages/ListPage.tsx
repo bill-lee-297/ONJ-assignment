@@ -47,19 +47,17 @@ const ListPage = () => {
   }, [searchKeyword, getTemplatesList]);
 
   return (
-    <div>
+    <div className="w-full h-full">
       <MenuTitle className="mb-6">템플릿 목록</MenuTitle>
       <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
         {templates?.map((tpl: Template) => (
-          <Box key={tpl.id} onClick={() => navigate(`/detail/${tpl.id}`)}>
-            <div className="flex flex-col gap-1 cursor-pointer">
-              <ContentTitle>{tpl.title}</ContentTitle>
-              <ContentDesc>{tpl.description}</ContentDesc>
-              <div className="text-sm text-gray-500">
-                {formatDate(tpl.updatedAt)}
-              </div>
+          <Box key={tpl.id} onClick={() => navigate(`/detail/${tpl.id}`)} className="hover:bg-gray-50 cursor-pointer">
+            <ContentTitle>{tpl.title}</ContentTitle>
+            <ContentDesc>{tpl.description}</ContentDesc>
+            <div className="text-sm text-gray-500">
+              {formatDate(tpl.updatedAt)}
             </div>
-            <div className="flex justify-end mt-1 gap-0.5">
+            <div className="flex justify-end mt-1 gap-0.5" onClick={e => e.stopPropagation()}>
               <IconButton onClick={() => navigate(`/edit/${tpl.id}`)}>
                 <MdOutlineEdit size={20} />
               </IconButton>
@@ -69,8 +67,10 @@ const ListPage = () => {
             </div>
           </Box>
         ))}
-        {templates.length === 0 && <div className="text-center text-gray-400 py-8">검색 결과가 없습니다.</div>}
       </div>
+      {templates.length === 0 && (
+        <div className="text-center text-gray-400 py-8">검색 결과가 없습니다.</div>
+      )}
     </div>
   );
 };

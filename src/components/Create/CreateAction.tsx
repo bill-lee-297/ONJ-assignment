@@ -3,9 +3,9 @@ import useAlert from '@/hooks/useAlert';
 import { useParams, useNavigate } from 'react-router';
 import type { Template } from '@/type/templates';
 import { v4 as uuidv4 } from 'uuid';
-import validateQuestions from '@/utils/validate';
+import { validateTitle, validateQuestions } from '@/utils/validate';
 import { getAllTemplates, saveTemplate } from '@/service/templates';
-import { IoDuplicateSharp } from "react-icons/io5";
+import { GrDuplicate } from "react-icons/gr";
 import { FaRegSave } from 'react-icons/fa';
 import IconButton from '@/components/Atoms/IconButton';
 
@@ -22,14 +22,23 @@ const CreateAction = () => {
   const handleCreate = async (e: React.FormEvent, mode: 'create' | 'duplicate' = 'create') => {
     e.preventDefault();
 
-    const error = validateQuestions(questions);
-    if (error) {
-      await showAlert(error, { cancel: false });
+    const titleError = validateTitle(title);
+    if (titleError) {
+      await showAlert(titleError, { cancel: false });
+      return false;
+    }
+
+    const questionError = validateQuestions(questions);
+    if (questionError) {
+      await showAlert(questionError, { cancel: false });
       return false;
     }
 
     if (mode === 'duplicate') {
       const confirmed = await showAlert('새로운 템플릿으로 생성하시겠습니까?', { cancel: true });
+      if (!confirmed) return;
+    } else {
+      const confirmed = await showAlert('이대로 저장하시겠습니까?', { cancel: true });
       if (!confirmed) return;
     }
 
@@ -42,7 +51,7 @@ const CreateAction = () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    const newTemplates = templates ? [...JSON.parse(templates), newTemplate] : [newTemplate];
+    const newTemplates = templates ? [...templates, newTemplate] : [newTemplate];
     saveTemplate(newTemplates);
     navigate('/');
   };
@@ -54,7 +63,7 @@ const CreateAction = () => {
       await showAlert(error, { cancel: false });
       return false;
     }
-    const confirmed = await showAlert('이대로 수정하시겠습니까?', { cancel: true });
+    const confirmed = await showAlert('이대로 저장하시겠습니까?', { cancel: true });
     if (!confirmed) return;
     const templates = getAllTemplates();
     const updatedTemplates = templates.map((tpl: Template) =>
@@ -67,7 +76,7 @@ const CreateAction = () => {
   return isEdit ? (
     <div className="flex flex-col md:flex-row items-center justify-between gap-3">
       <IconButton onClick={e => handleCreate(e, 'duplicate')}>
-        <IoDuplicateSharp size={20} />
+        <GrDuplicate size={20} />
       </IconButton>
       <IconButton onClick={handleModify}>
         <FaRegSave size={20} />

@@ -31,13 +31,13 @@ const PreviewPage = () => {
   return (
     <div>
       <MenuTitle className="mb-6">템플릿 미리보기</MenuTitle>
-      <Box>
+      <Box className="mb-4">
         <ContentTitle>{previewTemplate.title || ''}</ContentTitle>
         <ContentDesc>{previewTemplate.description || ''}</ContentDesc>
       </Box>
       <div className="flex flex-col gap-2">
         {previewTemplate.questions.map((question: TemplateQuestion) => (
-          <Box key={question.id}>
+          <Box key={question.id} className="mb-4">
             <div className="text-gray-500">
               {question.label}
               {question.required && <span className="text-red-500">*</span>}
