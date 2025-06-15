@@ -8,13 +8,13 @@ const getTemplates = (type: 'all' | 'search' | 'detail', text: string): Template
   const templates = JSON.parse(localStorage.getItem('templates') || '[]');
 
   if (type === 'all') {
-    return templates.sort((a: Template, b: Template) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return templates.sort((a: Template, b: Template) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
   }
 
   if (type === 'search') {
     return templates
       .filter((tpl: Template) => tpl.title.toLowerCase().includes(text))
-      .sort((a: Template, b: Template) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      .sort((a: Template, b: Template) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
   }
 
   if (type === 'detail') {

@@ -7,6 +7,7 @@ import { useCreateStore } from '@/store/createStore';
 import CreateQuestion from '@/components/Create/CreateQuestion';
 import CreateAction from '@/components/Create/CreateAction';
 import { getAllTemplates } from '@/service/templates';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreatePage = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const CreatePage = () => {
   const setTitle = useCreateStore(state => state.setTitle);
   const setDescription = useCreateStore(state => state.setDescription);
   const setQuestions = useCreateStore(state => state.setQuestions);
+  const resetStore = useCreateStore(state => state.resetStore);
 
   const isEdit = Boolean(id);
 
@@ -27,11 +29,16 @@ const CreatePage = () => {
         setQuestions(template.questions);
       }
     } else {
-      setTitle('');
-      setDescription('');
-      setQuestions([]);
+      resetStore();
+      setQuestions([
+        {
+          id: `qst-${uuidv4()}`,
+          type: 'text',
+          label: '제목 없는 질문',
+        },
+      ]);
     }
-  }, [id, isEdit, setTitle, setDescription, setQuestions]);
+  }, [id, isEdit, setTitle, setDescription, setQuestions, resetStore]);
 
   return (
     <div className="h-full w-full flex flex-col justify-center">

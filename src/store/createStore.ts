@@ -11,20 +11,25 @@ interface CreateState {
   setQuestions: (questions: TemplateQuestion[]) => void;
   setQuestion: (question: TemplateQuestion) => void;
   deleteQuestion: (questionId: string) => void;
+  resetStore: () => void;
 }
 
-export const useCreateStore = create<CreateState>((set, get) => ({
+const initialState = {
   title: '제목 없는 템플릿',
+  description: '',
+  questions: [],
+};
+
+export const useCreateStore = create<CreateState>((set, get) => ({
+  ...initialState,
   setTitle: title => {
     set({ title });
     updatePreviewTemplate({ title });
   },
-  description: '',
   setDescription: description => {
     set({ description });
     updatePreviewTemplate({ description });
   },
-  questions: [],
   setQuestions: questions => {
     const newQuestions = [...questions];
     set({ questions: newQuestions });
@@ -41,5 +46,9 @@ export const useCreateStore = create<CreateState>((set, get) => ({
     const newQuestions = questions.filter(question => question.id !== questionId);
     set({ questions: newQuestions });
     updatePreviewTemplate({ questions: newQuestions });
+  },
+  resetStore: () => {
+    set(initialState);
+    updatePreviewTemplate(initialState);
   }
 }));
