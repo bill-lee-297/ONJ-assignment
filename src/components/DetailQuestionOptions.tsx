@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import OptionsRow from './Atoms/OptionsRow';
+
 import CheckInput from './Atoms/CheckInput';
+import OptionsRow from './Atoms/OptionsRow';
 
 interface DetailQuestionOptionsProps {
   type: string;

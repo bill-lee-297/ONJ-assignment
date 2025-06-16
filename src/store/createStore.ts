@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import type { Question } from '@/types/templates';
+
 import { updatePreviewTemplate } from '@/db/preview';
+import type { Question } from '@/types/templates';
 
 interface CreateState {
   title: string;
@@ -37,7 +38,7 @@ export const useCreateStore = create<CreateState>((set, get) => ({
   },
   setQuestion: question => {
     const questions = get().questions;
-    const newQuestions = questions.map(item => item.id === question.id ? question : item);
+    const newQuestions = questions.map(item => (item.id === question.id ? question : item));
     set({ questions: newQuestions });
     updatePreviewTemplate({ questions: newQuestions });
   },
@@ -50,5 +51,5 @@ export const useCreateStore = create<CreateState>((set, get) => ({
   resetStore: () => {
     set(initialState);
     updatePreviewTemplate(initialState);
-  }
+  },
 }));

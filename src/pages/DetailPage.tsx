@@ -1,17 +1,17 @@
-import { getTemplate, deleteTemplate } from '@/db/templates';
+import { MdOutlineEdit } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
 import { useParams, useNavigate } from 'react-router-dom';
-import Box from '@/components/Atoms/Box';
-import type { Template, Question } from '@/types/templates';
-import DetailQuestionOptions from '@/components/DetailQuestionOptions';
-import MenuTitle from '@/components/Atoms/MenuTitle';
-import ContentTitle from '@/components/Atoms/ContentTitle';
-import ContentDesc from '@/components/Atoms/ContentDesc';
-import { MdOutlineEdit } from "react-icons/md";
-import IconButton from '@/components/Atoms/IconButton';
-import { MdDeleteOutline } from "react-icons/md";
-import useAlert from '@/hooks/useAlert';
-import ActionButtonRow from '@/components/Create/ActionButtonRow';
 
+import Box from '@/components/Atoms/Box';
+import ContentDesc from '@/components/Atoms/ContentDesc';
+import ContentTitle from '@/components/Atoms/ContentTitle';
+import IconButton from '@/components/Atoms/IconButton';
+import MenuTitle from '@/components/Atoms/MenuTitle';
+import ActionButtonRow from '@/components/Create/ActionButtonRow';
+import DetailQuestionOptions from '@/components/DetailQuestionOptions';
+import { getTemplate, deleteTemplate } from '@/db/templates';
+import useAlert from '@/hooks/useAlert';
+import type { Template, Question } from '@/types/templates';
 
 const DetailPage = () => {
   const { id } = useParams();

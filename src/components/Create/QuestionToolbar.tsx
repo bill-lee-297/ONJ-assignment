@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { MdDeleteOutline } from 'react-icons/md';
-import type { Question } from '@/types/templates';
+
+import IconButton from '@/components/Atoms/IconButton';
 import ToggleButton from '@/components/Atoms/ToggleButton';
 import { useCreateStore } from '@/store/createStore';
-import { memo } from 'react';
-import IconButton from '@/components/Atoms/IconButton';
+import type { Question } from '@/types/templates';
 
 interface QuestionToolbarProps {
   question: Question;
@@ -30,10 +31,7 @@ const QuestionToolbar = memo(({ question }: QuestionToolbarProps) => {
 
   return (
     <div className="flex justify-end items-center border-t border-gray-300 pt-2 mt-4">
-      <IconButton 
-        onClick={onDelete} 
-        className="p-2 hover:bg-gray-100 rounded-full cursor-pointer"
-      >
+      <IconButton onClick={onDelete} className="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
         <MdDeleteOutline size={24} />
       </IconButton>
 
@@ -47,4 +45,4 @@ const QuestionToolbar = memo(({ question }: QuestionToolbarProps) => {
   );
 });
 
-export default QuestionToolbar; 
+export default QuestionToolbar;

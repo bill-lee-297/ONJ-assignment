@@ -14,7 +14,11 @@ const AlertModal = ({ open, message, onConfirm, onCancel }: AlertModalProps) => 
       <div className="bg-white rounded-lg shadow-lg text-center py-4 min-w-[400px]">
         <div className="text-xl text-gray-800 border-b border-gray-200 py-8 px-10">{message}</div>
         <div className="flex justify-end gap-2 mt-4 px-4">
-          {onCancel && <Button variant="secondary" onClick={onCancel}>취소</Button>}
+          {onCancel && (
+            <Button variant="secondary" onClick={onCancel}>
+              취소
+            </Button>
+          )}
           <Button onClick={onConfirm}>확인</Button>
         </div>
       </div>

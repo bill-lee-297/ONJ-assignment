@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import type { Template } from '@/types/templates';
 import { useParams } from 'react-router-dom';
-import CreateTitle from '@/components/Molecules/CreateTitle';
-import MenuTitle from '@/components/Atoms/MenuTitle';
-import { useCreateStore } from '@/store/createStore';
-import CreateQuestion from '@/components/Create/CreateQuestion';
-import CreateAction from '@/components/Create/CreateAction';
-import { getAllTemplates } from '@/db/templates';
 import { v4 as uuidv4 } from 'uuid';
+
+import MenuTitle from '@/components/Atoms/MenuTitle';
+import CreateAction from '@/components/Create/CreateAction';
+import CreateQuestion from '@/components/Create/CreateQuestion';
+import CreateTitle from '@/components/Molecules/CreateTitle';
+import { getAllTemplates } from '@/db/templates';
+import { useCreateStore } from '@/store/createStore';
+import type { Template } from '@/types/templates';
 
 const CreatePage = () => {
   const { id } = useParams();

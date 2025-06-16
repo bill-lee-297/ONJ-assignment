@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
+
 import { useCreateStore } from '@/store/createStore';
 import type { Question } from '@/types/templates';
-
 
 interface QuestionLabelProps {
   question: Question;
@@ -12,7 +12,7 @@ const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: 'label' | 'options') => {
     if (!question) return;
-    
+
     if (key === 'label') {
       const newQuestion = { ...question, label: e.target.value };
       setQuestion(newQuestion);
@@ -22,7 +22,7 @@ const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
         const newQuestion = { ...question, type, options: [] };
         setQuestion(newQuestion);
       } else {
-        const newQuestion = { 
+        const newQuestion = {
           id: question.id,
           type,
           label: question.label,
@@ -59,4 +59,4 @@ const QuestionLabel = memo(({ question }: QuestionLabelProps) => {
   );
 });
 
-export default QuestionLabel; 
+export default QuestionLabel;

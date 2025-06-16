@@ -1,8 +1,9 @@
+import { IoEyeOutline } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router-dom';
-import Search from './Molecules/Search';
+
 import IconButton from './Atoms/IconButton';
-import { IoEyeOutline } from "react-icons/io5";
 import NavItem from './Atoms/NavItem';
+import Search from './Molecules/Search';
 
 const Header = () => {
   const location = useLocation();
@@ -19,14 +20,10 @@ const Header = () => {
         <nav className="w-full">
           <ul className="flex flex-row items-center justify-start gap-4">
             <Link to="/">
-              <NavItem>
-                홈
-              </NavItem>
+              <NavItem>홈</NavItem>
             </Link>
             <Link to="/create">
-              <NavItem>
-                생성
-              </NavItem>
+              <NavItem>생성</NavItem>
             </Link>
           </ul>
         </nav>

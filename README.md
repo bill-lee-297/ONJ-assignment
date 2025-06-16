@@ -50,24 +50,29 @@ src/
 ## 주요 기능
 
 ### 1. 템플릿 목록
-- `/`  
+
+- `/`
 - 저장된 템플릿 리스트를 조회, 검색, 삭제, 수정 진입 가능
 
 ### 2. 템플릿 생성/수정
-- `/create`, `/edit/:id`  
-- 템플릿 제목, 설명, 질문(문항) 추가/수정/삭제  
-- 질문 타입: 텍스트, 체크박스, 드롭다운, 라디오  
+
+- `/create`, `/edit/:id`
+- 템플릿 제목, 설명, 질문(문항) 추가/수정/삭제
+- 질문 타입: 텍스트, 체크박스, 드롭다운, 라디오
 - 실시간 미리보기 지원
 
 ### 3. 템플릿 상세
-- `/detail/:id`  
+
+- `/detail/:id`
 - 템플릿의 질문, 옵션, 필수 여부 등 상세 정보 확인
 
 ### 4. 템플릿 미리보기
-- `/preview`  
+
+- `/preview`
 - 현재 작성 중인 템플릿을 미리보기
 
 ### 5. 404 페이지
+
 - 존재하지 않는 경로 접근 시 404 안내
 
 ---
@@ -148,21 +153,20 @@ interface Question {
 
 ---
 
-
 ## 컴포넌트 구조
 
 ### Layout
+
 ![Layout](./document/images/Layout.png)
 
-
 ### 홈-리스트페이지
+
 ![List Page Component](./document/images/List.png)
 
-
 ### 상세페이지
+
 ![Detail Page Component](./document/images/Detail.png)
 
-
 ### 생성/수정 페이지
-![Create Page Component](./document/images/Create.png)
----
+
+## ![Create Page Component](./document/images/Create.png)

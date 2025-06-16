@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+
 import Box from '@/components/Atoms/Box';
-import type { Template, Question } from '@/types/templates';
-import DetailQuestionOptions from '@/components/DetailQuestionOptions';
-import MenuTitle from '@/components/Atoms/MenuTitle';
-import ContentTitle from '@/components/Atoms/ContentTitle';
 import ContentDesc from '@/components/Atoms/ContentDesc';
+import ContentTitle from '@/components/Atoms/ContentTitle';
+import MenuTitle from '@/components/Atoms/MenuTitle';
+import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import { getPreviewTemplate } from '@/db/preview';
+import type { Template, Question } from '@/types/templates';
 
 const PreviewPage = () => {
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null);

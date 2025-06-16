@@ -6,4 +6,4 @@ const NavItem = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default NavItem; 
+export default NavItem;

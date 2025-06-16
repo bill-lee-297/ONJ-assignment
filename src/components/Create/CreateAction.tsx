@@ -1,14 +1,17 @@
-import { useCreateStore } from '@/store/createStore';
-import useAlert from '@/hooks/useAlert';
-import { useParams, useNavigate } from 'react-router-dom';
-import type { Template } from '@/types/templates';
-import { v4 as uuidv4 } from 'uuid';
-import { validateTitle, validateQuestions } from '@/utils/validate';
-import { getAllTemplates, saveTemplate } from '@/db/templates';
-import { GrDuplicate } from "react-icons/gr";
 import { FaRegSave } from 'react-icons/fa';
-import IconButton from '@/components/Atoms/IconButton';
+import { GrDuplicate } from 'react-icons/gr';
+import { useParams, useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+
 import ActionButtonRow from './ActionButtonRow';
+
+import IconButton from '@/components/Atoms/IconButton';
+import { getAllTemplates, saveTemplate } from '@/db/templates';
+import useAlert from '@/hooks/useAlert';
+import { useCreateStore } from '@/store/createStore';
+import type { Template } from '@/types/templates';
+import { validateTitle, validateQuestions } from '@/utils/validate';
+
 
 const CreateAction = () => {
   const showAlert = useAlert();

@@ -1,12 +1,15 @@
-import { useCreateStore } from '@/store/createStore';
-import QuestionLabel from './QuestionLabel';
-import QuestionContent from './QuestionContents';
-import QuestionToolbar from './QuestionToolbar';
 import { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { IoMdAdd } from 'react-icons/io';
+import { v4 as uuidv4 } from 'uuid';
 
-const CreateQuestion = () => { 
+import QuestionContent from './QuestionContents';
+import QuestionLabel from './QuestionLabel';
+import QuestionToolbar from './QuestionToolbar';
+
+
+import { useCreateStore } from '@/store/createStore';
+
+const CreateQuestion = () => {
   const setQuestions = useCreateStore(state => state.setQuestions);
   const questions = useCreateStore(state => state.questions);
 
@@ -22,11 +25,10 @@ const CreateQuestion = () => {
   };
 
   useEffect(() => {
-    if(questions.length === 0) {
+    if (questions.length === 0) {
       handleAddQuestion();
     }
-  }, [questions]);
-
+  }, [questions, handleAddQuestion]);
 
   return (
     <div className="flex flex-col gap-10">

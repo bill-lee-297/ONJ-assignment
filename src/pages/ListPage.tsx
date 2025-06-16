@@ -1,17 +1,18 @@
 import { useEffect, useState, useCallback } from 'react';
+import { MdOutlineEdit } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import type { Template } from '@/types/templates';
-import { getTemplates, deleteTemplate, getAllTemplates } from '@/db/templates';
+
 import Box from '@/components/Atoms/Box';
+import ContentDesc from '@/components/Atoms/ContentDesc';
+import ContentTitle from '@/components/Atoms/ContentTitle';
+import IconButton from '@/components/Atoms/IconButton';
+import MenuTitle from '@/components/Atoms/MenuTitle';
+import { getTemplates, deleteTemplate, getAllTemplates } from '@/db/templates';
 import useAlert from '@/hooks/useAlert';
 import { useSearchStore } from '@/store/searchStore';
-import MenuTitle from '@/components/Atoms/MenuTitle';
-import ContentTitle from '@/components/Atoms/ContentTitle';
-import ContentDesc from '@/components/Atoms/ContentDesc';
+import type { Template } from '@/types/templates';
 import formatDate from '@/utils/date';
-import { MdOutlineEdit } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
-import IconButton from '@/components/Atoms/IconButton';
 
 const ListPage = () => {
   const searchKeyword = useSearchStore(state => state.searchKeyword);
@@ -57,9 +58,7 @@ const ListPage = () => {
             <ContentTitle>{tpl.title}</ContentTitle>
             <ContentDesc>{tpl.description}</ContentDesc>
             <div className="flex items-center justify-between gap-0.5">
-              <div className="text-sm text-gray-500">
-                {formatDate(tpl.updatedAt)}
-              </div>
+              <div className="text-sm text-gray-500">{formatDate(tpl.updatedAt)}</div>
               <div className="flex" onClick={e => e.stopPropagation()}>
                 <IconButton onClick={() => navigate(`/edit/${tpl.id}`)}>
                   <MdOutlineEdit size={20} />
@@ -72,9 +71,7 @@ const ListPage = () => {
           </Box>
         ))}
       </div>
-      {totalCount === 0 && (
-        <div className="text-center text-gray-400 py-8">등록된 템플릿이 없습니다.</div>
-      )}
+      {totalCount === 0 && <div className="text-center text-gray-400 py-8">등록된 템플릿이 없습니다.</div>}
       {templates.length === 0 && totalCount > 0 && (
         <div className="text-center text-gray-400 py-8">검색 결과가 없습니다.</div>
       )}

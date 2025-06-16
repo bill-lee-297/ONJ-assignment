@@ -1,5 +1,7 @@
 import { memo } from 'react';
+
 import Options from './Options';
+
 import type { Question } from '@/types/templates';
 
 interface QuestionContentProps {
@@ -23,4 +25,4 @@ const QuestionContent = memo(({ question }: QuestionContentProps) => {
   );
 });
 
-export default QuestionContent; 
+export default QuestionContent;

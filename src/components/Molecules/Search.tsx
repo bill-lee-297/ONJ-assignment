@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useSearchStore } from '@/store/searchStore';
+
 import useDebounce from '@/hooks/useDebounce';
+import { useSearchStore } from '@/store/searchStore';
 
 const Search = () => {
   const [inputValue, setInputValue] = useState('');

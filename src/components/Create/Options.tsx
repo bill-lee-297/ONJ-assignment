@@ -1,10 +1,11 @@
-import type { QuestionType, Question } from '@/types/templates';
-import { IoMdClose } from 'react-icons/io';
-import OptionsRow from '@/components/Atoms/OptionsRow';
-import CheckInput from '@/components/Atoms/CheckInput';
-import { useCreateStore } from '@/store/createStore';
 import { memo } from 'react';
+import { IoMdClose } from 'react-icons/io';
+
+import CheckInput from '@/components/Atoms/CheckInput';
 import OptionInput from '@/components/Atoms/OptionInput';
+import OptionsRow from '@/components/Atoms/OptionsRow';
+import { useCreateStore } from '@/store/createStore';
+import type { QuestionType, Question } from '@/types/templates';
 
 interface OptionProps {
   question: Question;
@@ -14,7 +15,7 @@ interface OptionProps {
 const Option = memo(({ question, type }: OptionProps) => {
   const setQuestion = useCreateStore(state => state.setQuestion);
 
-  const onAddOption = () =>{
+  const onAddOption = () => {
     if (!question) return;
     const options = question.options;
     const addIdx = options?.length ? options.length + 1 : 1;
@@ -54,11 +55,11 @@ const Option = memo(({ question, type }: OptionProps) => {
             <OptionsRow>
               {(type === 'radio' || type === 'checkbox') && <CheckInput type={type} checked={false} />}
               {type === 'dropdown' && <div>{index + 1}</div>}
-              <OptionInput 
-                key={`${question.id}-option-${index}`} 
-                className="hover:outline-1 hover:outline-gray-300 rounded" 
-                value={option} 
-                onChange={e => onOptionChange(e, index)} 
+              <OptionInput
+                key={`${question.id}-option-${index}`}
+                className="hover:outline-1 hover:outline-gray-300 rounded"
+                value={option}
+                onChange={e => onOptionChange(e, index)}
               />
             </OptionsRow>
             <button type="button" onClick={() => onDeleteOption(index)} className="cursor-pointer">
@@ -70,13 +71,8 @@ const Option = memo(({ question, type }: OptionProps) => {
       <OptionsRow className="mt-4">
         {(type === 'radio' || type === 'checkbox') && <CheckInput type={type} checked={false} />}
         {type === 'dropdown' && <div>{options?.length ? options?.length + 1 : 1}</div>}
-        
-        <OptionInput
-          className="cursor-pointer"
-          placeholder="옵션 추가"
-          onClick={onAddOption}
-          readOnly
-        />
+
+        <OptionInput className="cursor-pointer" placeholder="옵션 추가" onClick={onAddOption} readOnly />
       </OptionsRow>
     </div>
   );
