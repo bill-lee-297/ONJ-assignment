@@ -4,7 +4,7 @@ interface ContentDescProps {
 }
 
 const ContentDesc = ({ children, className }: ContentDescProps) => {
-  return <h3 className={`text-md text-gray-500 ${className}`}>{children}</h3>;
+  return <h3 className={`text-md text-gray-500 ${className} ${children ? '' : 'h-6'}`}>{children}</h3>;
 };
 
 export default ContentDesc;

@@ -54,16 +54,18 @@ const ListPage = () => {
           <Box key={tpl.id} onClick={() => navigate(`/detail/${tpl.id}`)} className="hover:bg-gray-50 cursor-pointer">
             <ContentTitle>{tpl.title}</ContentTitle>
             <ContentDesc>{tpl.description}</ContentDesc>
-            <div className="text-sm text-gray-500">
-              {formatDate(tpl.updatedAt)}
-            </div>
-            <div className="flex justify-end mt-1 gap-0.5" onClick={e => e.stopPropagation()}>
-              <IconButton onClick={() => navigate(`/edit/${tpl.id}`)}>
-                <MdOutlineEdit size={20} />
-              </IconButton>
-              <IconButton onClick={() => handleDelete(tpl.id)}>
-                <MdDeleteOutline size={20} />
-              </IconButton>
+            <div className="flex items-center justify-between gap-0.5">
+              <div className="text-sm text-gray-500">
+                {formatDate(tpl.updatedAt)}
+              </div>
+              <div className="flex" onClick={e => e.stopPropagation()}>
+                <IconButton onClick={() => navigate(`/edit/${tpl.id}`)}>
+                  <MdOutlineEdit size={20} />
+                </IconButton>
+                <IconButton onClick={() => handleDelete(tpl.id)}>
+                  <MdDeleteOutline size={20} />
+                </IconButton>
+              </div>
             </div>
           </Box>
         ))}
