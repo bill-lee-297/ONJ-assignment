@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Template } from '@/types/templates';
-import { getTemplates, deleteTemplate } from '@/db/templates';
+import { getTemplates, deleteTemplate, getAllTemplates } from '@/db/templates';
 import Box from '@/components/Atoms/Box';
 import useAlert from '@/hooks/useAlert';
 import { useSearchStore } from '@/store/searchStore';
@@ -16,11 +16,13 @@ import IconButton from '@/components/Atoms/IconButton';
 const ListPage = () => {
   const searchKeyword = useSearchStore(state => state.searchKeyword);
   const [templates, setTemplates] = useState<Template[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
   const navigate = useNavigate();
   const showAlert = useAlert();
 
   const getTemplatesList = useCallback(() => {
     setTemplates(getTemplates(searchKeyword) as Template[]);
+    setTotalCount(getAllTemplates().length);
   }, [searchKeyword]);
 
   const handleDelete = async (id: string) => {
@@ -70,7 +72,10 @@ const ListPage = () => {
           </Box>
         ))}
       </div>
-      {templates.length === 0 && (
+      {totalCount === 0 && (
+        <div className="text-center text-gray-400 py-8">등록된 템플릿이 없습니다.</div>
+      )}
+      {templates.length === 0 && totalCount > 0 && (
         <div className="text-center text-gray-400 py-8">검색 결과가 없습니다.</div>
       )}
     </div>
