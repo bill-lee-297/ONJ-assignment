@@ -1,7 +1,7 @@
-import { getTemplates, deleteTemplate } from '@/service/templates';
+import { getTemplate, deleteTemplate } from '@/db/templates';
 import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@/components/Atoms/Box';
-import type { Template, TemplateQuestion } from '@/type/templates';
+import type { Template, Question } from '@/types/templates';
 import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import ContentTitle from '@/components/Atoms/ContentTitle';
@@ -15,7 +15,7 @@ import useAlert from '@/hooks/useAlert';
 const DetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const filteredTemplates = getTemplates('detail', id || '') as Template;
+  const filteredTemplates = getTemplate(id || '') as Template;
   const showAlert = useAlert();
 
   if (!filteredTemplates) {
@@ -51,7 +51,7 @@ const DetailPage = () => {
         <ContentDesc>{filteredTemplates.description || ''}</ContentDesc>
       </Box>
       <div className="flex flex-col gap-2">
-        {filteredTemplates.questions.map((question: TemplateQuestion) => (
+        {filteredTemplates.questions.map((question: Question) => (
           <Box key={question.id} className="mb-4">
             <div className="text-gray-500">
               {question.label}

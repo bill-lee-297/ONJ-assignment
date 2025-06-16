@@ -18,12 +18,16 @@ const Header = () => {
       <div className="flex flex-row items-center justify-between h-full w-full mx-auto px-4 max-w-2xl">
         <nav className="w-full">
           <ul className="flex flex-row items-center justify-start gap-4">
-            <NavItem>
-              <Link to="/">홈</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/create">생성</Link>
-            </NavItem>
+            <Link to="/">
+              <NavItem>
+                홈
+              </NavItem>
+            </Link>
+            <Link to="/create">
+              <NavItem>
+                생성
+              </NavItem>
+            </Link>
           </ul>
         </nav>
         <div className="w-full flex flex-row items-center justify-end">

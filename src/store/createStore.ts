@@ -1,15 +1,15 @@
 import { create } from 'zustand';
-import type { TemplateQuestion } from '@/type/templates';
-import { updatePreviewTemplate } from '@/service/preview';
+import type { Question } from '@/types/templates';
+import { updatePreviewTemplate } from '@/db/preview';
 
 interface CreateState {
   title: string;
   setTitle: (title: string) => void;
   description: string;
   setDescription: (description: string) => void;
-  questions: TemplateQuestion[];
-  setQuestions: (questions: TemplateQuestion[]) => void;
-  setQuestion: (question: TemplateQuestion) => void;
+  questions: Question[];
+  setQuestions: (questions: Question[]) => void;
+  setQuestion: (question: Question) => void;
   deleteQuestion: (questionId: string) => void;
   resetStore: () => void;
 }

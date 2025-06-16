@@ -1,12 +1,12 @@
 import { MdDeleteOutline } from 'react-icons/md';
-import type { TemplateQuestion } from '@/type/templates';
+import type { Question } from '@/types/templates';
 import ToggleButton from '@/components/Atoms/ToggleButton';
 import { useCreateStore } from '@/store/createStore';
 import { memo } from 'react';
 import IconButton from '@/components/Atoms/IconButton';
 
 interface QuestionToolbarProps {
-  question: TemplateQuestion;
+  question: Question;
 }
 
 const QuestionToolbar = memo(({ question }: QuestionToolbarProps) => {

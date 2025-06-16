@@ -1,4 +1,4 @@
-import type { TemplateQuestionType, TemplateQuestion } from '@/type/templates';
+import type { QuestionType, Question } from '@/types/templates';
 import { IoMdClose } from 'react-icons/io';
 import OptionsRow from '@/components/Atoms/OptionsRow';
 import CheckInput from '@/components/Atoms/CheckInput';
@@ -7,8 +7,8 @@ import { memo } from 'react';
 import OptionInput from '@/components/Atoms/OptionInput';
 
 interface OptionProps {
-  question: TemplateQuestion;
-  type: TemplateQuestionType;
+  question: Question;
+  type: QuestionType;
 }
 
 const Option = memo(({ question, type }: OptionProps) => {

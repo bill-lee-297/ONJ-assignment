@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import Options from './Options';
-import type { TemplateQuestion } from '@/type/templates';
+import type { Question } from '@/types/templates';
 
 interface QuestionContentProps {
-  question: TemplateQuestion;
+  question: Question;
 }
 
 const QuestionContent = memo(({ question }: QuestionContentProps) => {

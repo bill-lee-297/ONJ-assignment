@@ -10,7 +10,6 @@ const CreateQuestion = () => {
   const setQuestions = useCreateStore(state => state.setQuestions);
   const questions = useCreateStore(state => state.questions);
 
-
   const handleAddQuestion = () => {
     setQuestions([
       ...questions,

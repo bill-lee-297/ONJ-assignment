@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { useCreateStore } from '@/store/createStore';
-import type { TemplateQuestion } from '@/type/templates';
+import type { Question } from '@/types/templates';
 
 
 interface QuestionLabelProps {
-  question: TemplateQuestion;
+  question: Question;
 }
 
 const QuestionLabel = memo(({ question }: QuestionLabelProps) => {

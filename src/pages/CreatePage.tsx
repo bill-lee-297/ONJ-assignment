@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import type { Template } from '@/type/templates';
+import type { Template } from '@/types/templates';
 import { useParams } from 'react-router-dom';
 import CreateTitle from '@/components/Molecules/CreateTitle';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import { useCreateStore } from '@/store/createStore';
 import CreateQuestion from '@/components/Create/CreateQuestion';
 import CreateAction from '@/components/Create/CreateAction';
-import { getAllTemplates } from '@/service/templates';
+import { getAllTemplates } from '@/db/templates';
 import { v4 as uuidv4 } from 'uuid';
 
 const CreatePage = () => {

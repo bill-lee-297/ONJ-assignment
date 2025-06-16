@@ -1,4 +1,4 @@
-import type { TemplateQuestion } from '@/type/templates';
+import type { Question } from '@/types/templates';
 
 const validateTitle = (title: string) => {
   if (title.length === 0) {
@@ -7,7 +7,7 @@ const validateTitle = (title: string) => {
   return null;
 };
 
-const validateQuestions = (questions: TemplateQuestion[]) => {
+const validateQuestions = (questions: Question[]) => {
   if (questions.length === 0) {
     return "질문을 추가해주세요.";
   }

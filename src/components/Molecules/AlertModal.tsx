@@ -10,11 +10,11 @@ interface AlertModalProps {
 const AlertModal = ({ open, message, onConfirm, onCancel }: AlertModalProps) => {
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-      <div className="bg-white rounded-lg shadow-lg p-6 min-w-[280px] text-center">
-        <div className="mb-4 text-lg">{message}</div>
-        <div className="flex justify-center gap-4 mt-4">
-          {onCancel && <Button onClick={onCancel}>취소</Button>}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-white rounded-lg shadow-lg text-center py-4 min-w-[400px]">
+        <div className="text-xl text-gray-800 border-b border-gray-200 py-8 px-10">{message}</div>
+        <div className="flex justify-end gap-2 mt-4 px-4">
+          {onCancel && <Button variant="secondary" onClick={onCancel}>취소</Button>}
           <Button onClick={onConfirm}>확인</Button>
         </div>
       </div>

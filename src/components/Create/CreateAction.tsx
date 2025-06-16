@@ -1,10 +1,10 @@
 import { useCreateStore } from '@/store/createStore';
 import useAlert from '@/hooks/useAlert';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { Template } from '@/type/templates';
+import type { Template } from '@/types/templates';
 import { v4 as uuidv4 } from 'uuid';
 import { validateTitle, validateQuestions } from '@/utils/validate';
-import { getAllTemplates, saveTemplate } from '@/service/templates';
+import { getAllTemplates, saveTemplate } from '@/db/templates';
 import { GrDuplicate } from "react-icons/gr";
 import { FaRegSave } from 'react-icons/fa';
 import IconButton from '@/components/Atoms/IconButton';

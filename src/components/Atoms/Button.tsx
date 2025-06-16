@@ -5,13 +5,14 @@ interface ButtonProps {
   className?: string;
   onClick?: (e: React.FormEvent) => void | Promise<boolean | void>;
   type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
 }
 
-const Button = ({ children, className = '', type = 'button', ...props }: ButtonProps) => {
+const Button = ({ children, className = '', type = 'button', variant = 'primary', ...props }: ButtonProps) => {
   return (
     <button
       type={type}
-      className={`px-4 py-1 rounded border border-gray-300 bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors cursor-pointer ${className}`}
+      className={`px-6 py-1.5 rounded border transition-colors cursor-pointer ${className} ${variant === 'primary' ? 'border-blue-500 bg-blue-600 text-white hover:bg-blue-800' : 'border-gray-100 bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
       {...props}
     >
       {children}

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Template } from '@/type/templates';
-import { getTemplates, deleteTemplate } from '@/service/templates';
+import type { Template } from '@/types/templates';
+import { getTemplates, deleteTemplate } from '@/db/templates';
 import Box from '@/components/Atoms/Box';
 import useAlert from '@/hooks/useAlert';
 import { useSearchStore } from '@/store/searchStore';
@@ -20,11 +20,11 @@ const ListPage = () => {
   const showAlert = useAlert();
 
   const getTemplatesList = useCallback(() => {
-    setTemplates(getTemplates('search', searchKeyword) as Template[]);
+    setTemplates(getTemplates(searchKeyword) as Template[]);
   }, [searchKeyword]);
 
   const handleDelete = async (id: string) => {
-    const confirmed = await showAlert('삭제하시겠습니까?', { cancel: true });
+    const confirmed = await showAlert('템플릿을 삭제하시겠습니까?', { cancel: true });
     if (!confirmed) return;
     deleteTemplate(id);
     getTemplatesList();
