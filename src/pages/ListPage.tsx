@@ -13,6 +13,7 @@ import useAlert from '@/hooks/useAlert';
 import { useSearchStore } from '@/store/searchStore';
 import type { Template } from '@/types/templates';
 import formatDate from '@/utils/date';
+import { truncateText } from '@/utils/string';
 
 const ListPage = () => {
   const searchKeyword = useSearchStore(state => state.searchKeyword);
@@ -55,8 +56,8 @@ const ListPage = () => {
       <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
         {templates?.map((tpl: Template) => (
           <Box key={tpl.id} onClick={() => navigate(`/detail/${tpl.id}`)} className="hover:bg-gray-50 cursor-pointer">
-            <ContentTitle>{tpl.title}</ContentTitle>
-            <ContentDesc>{tpl.description}</ContentDesc>
+            <ContentTitle>{truncateText(tpl.title, 20)}</ContentTitle>
+            <ContentDesc>{truncateText(tpl.description, 45)}</ContentDesc>
             <div className="flex items-center justify-between gap-0.5">
               <div className="text-sm text-gray-500">{formatDate(tpl.updatedAt)}</div>
               <div className="flex" onClick={e => e.stopPropagation()}>
