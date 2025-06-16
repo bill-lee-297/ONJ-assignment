@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,14 +6,13 @@ import QuestionContent from './QuestionContents';
 import QuestionLabel from './QuestionLabel';
 import QuestionToolbar from './QuestionToolbar';
 
-
 import { useCreateStore } from '@/store/createStore';
 
 const CreateQuestion = () => {
   const setQuestions = useCreateStore(state => state.setQuestions);
   const questions = useCreateStore(state => state.questions);
 
-  const handleAddQuestion = () => {
+  const handleAddQuestion = useCallback(() => {
     setQuestions([
       ...questions,
       {
@@ -22,7 +21,7 @@ const CreateQuestion = () => {
         label: '제목 없는 질문',
       },
     ]);
-  };
+  }, [questions, setQuestions]);
 
   useEffect(() => {
     if (questions.length === 0) {
