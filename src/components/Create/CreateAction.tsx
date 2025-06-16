@@ -8,6 +8,7 @@ import { getAllTemplates, saveTemplate } from '@/db/templates';
 import { GrDuplicate } from "react-icons/gr";
 import { FaRegSave } from 'react-icons/fa';
 import IconButton from '@/components/Atoms/IconButton';
+import ActionButtonRow from './ActionButtonRow';
 
 const CreateAction = () => {
   const showAlert = useAlert();
@@ -74,20 +75,20 @@ const CreateAction = () => {
   };
 
   return isEdit ? (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+    <ActionButtonRow>
       <IconButton onClick={e => handleCreate(e, 'duplicate')}>
         <GrDuplicate size={20} />
       </IconButton>
       <IconButton onClick={handleModify}>
         <FaRegSave size={20} />
       </IconButton>
-    </div>
+    </ActionButtonRow>
   ) : (
-    <div className="flex items-center justify-end gap-3">
+    <ActionButtonRow>
       <IconButton onClick={handleCreate}>
         <FaRegSave size={20} />
       </IconButton>
-    </div>
+    </ActionButtonRow>
   );
 };
 

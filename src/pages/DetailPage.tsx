@@ -10,6 +10,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import IconButton from '@/components/Atoms/IconButton';
 import { MdDeleteOutline } from "react-icons/md";
 import useAlert from '@/hooks/useAlert';
+import ActionButtonRow from '@/components/Create/ActionButtonRow';
 
 
 const DetailPage = () => {
@@ -37,14 +38,14 @@ const DetailPage = () => {
     <div>
       <div className="flex flex-row items-center justify-between mb-6">
         <MenuTitle>템플릿 상세보기</MenuTitle>
-        <div className="flex items-center justify-end gap-0.5">
+        <ActionButtonRow>
           <IconButton onClick={() => handleDelete(id || '')}>
             <MdDeleteOutline size={20} />
           </IconButton>
           <IconButton onClick={handleEdit}>
             <MdOutlineEdit size={20} />
           </IconButton>
-        </div>
+        </ActionButtonRow>
       </div>
       <Box className="mb-4">
         <ContentTitle>{filteredTemplates.title || ''}</ContentTitle>

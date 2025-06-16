@@ -12,10 +12,8 @@
 3. [주요 기능](#주요-기능)
 4. [데이터 구조](#데이터-구조)
 5. [실행 방법](#실행-방법)
-6. [스크립트](#스크립트)
-7. [코딩 컨벤션](#코딩-컨벤션)
-8. [기여 방법](#기여-방법)
-9. [라이선스](#라이선스)
+6. [라이브러리](#주요-라이브러리)
+7. [컴포넌트 구조](#컴포넌트-구조)
 
 ---
 
@@ -28,7 +26,6 @@
 - **React Router v6**: 라우팅
 - **TailwindCSS**: CSS 프레임워크
 - **ESLint, Prettier**: 코드 스타일 및 린팅
-- **uuid**: 고유 ID 생성
 
 ---
 
@@ -149,5 +146,23 @@ interface Question {
 
 - `react`, `react-dom`, `react-router-dom`, `zustand`, `uuid`, `@toss/use-overlay`, `tailwindcss`, `vite` 등
 
+---
 
+
+## 컴포넌트 구조
+
+### Layout
+![Layout](./document/images/Layout.png)
+
+
+### 홈-리스트페이지
+![List Page Component](./document/images/List.png)
+
+
+### 상세페이지
+![Detail Page Component](./document/images/Detail.png)
+
+
+### 생성/수정 페이지
+![Create Page Component](./document/images/Create.png)
 ---
