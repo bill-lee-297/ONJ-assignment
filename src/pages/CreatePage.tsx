@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { Template } from '@/type/templates';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import CreateTitle from '@/components/Molecules/CreateTitle';
 import MenuTitle from '@/components/Atoms/MenuTitle';
 import { useCreateStore } from '@/store/createStore';

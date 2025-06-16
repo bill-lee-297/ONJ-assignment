@@ -1,6 +1,6 @@
 import { useCreateStore } from '@/store/createStore';
 import useAlert from '@/hooks/useAlert';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import type { Template } from '@/type/templates';
 import { v4 as uuidv4 } from 'uuid';
 import { validateTitle, validateQuestions } from '@/utils/validate';

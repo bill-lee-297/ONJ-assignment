@@ -1,7 +1,6 @@
 import { getTemplates, deleteTemplate } from '@/service/templates';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@/components/Atoms/Box';
-import { useNavigate } from 'react-router';
 import type { Template, TemplateQuestion } from '@/type/templates';
 import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import MenuTitle from '@/components/Atoms/MenuTitle';

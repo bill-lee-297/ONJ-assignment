@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import type { Template } from '@/type/templates';
 import { getTemplates, deleteTemplate } from '@/service/templates';
 import Box from '@/components/Atoms/Box';
