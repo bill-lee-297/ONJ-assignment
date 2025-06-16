@@ -1,4 +1,5 @@
 const formatDate = (date: string) => {
+  if (!date) return '';
   return new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: '2-digit',

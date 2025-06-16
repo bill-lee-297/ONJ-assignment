@@ -30,8 +30,12 @@ const DetailPage = () => {
   const handleDelete = async (id: string) => {
     const confirmed = await showAlert('삭제하시겠습니까?', { cancel: true });
     if (!confirmed) return;
-    deleteTemplate(id);
-    navigate('/');
+    const result = deleteTemplate(id);
+    if (result) {
+      navigate('/');
+    } else {
+      showAlert('삭제에 실패했습니다.');
+    }
   };
 
   return (

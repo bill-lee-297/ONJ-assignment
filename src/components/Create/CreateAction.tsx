@@ -12,7 +12,6 @@ import { useCreateStore } from '@/store/createStore';
 import type { Template } from '@/types/templates';
 import { validateTitle, validateQuestions } from '@/utils/validate';
 
-
 const CreateAction = () => {
   const showAlert = useAlert();
   const { id } = useParams();
@@ -56,8 +55,12 @@ const CreateAction = () => {
       updatedAt: new Date().toISOString(),
     };
     const newTemplates = templates ? [...templates, newTemplate] : [newTemplate];
-    saveTemplate(newTemplates);
-    navigate('/');
+    const result = saveTemplate(newTemplates);
+    if (result) {
+      navigate('/');
+    } else {
+      showAlert('저장에 실패했습니다.');
+    }
   };
 
   const handleModify = async (e: React.FormEvent) => {
@@ -73,8 +76,12 @@ const CreateAction = () => {
     const updatedTemplates = templates.map((tpl: Template) =>
       tpl.id === id ? { ...tpl, title, description, questions, updatedAt: new Date().toISOString() } : tpl,
     );
-    saveTemplate(updatedTemplates);
-    navigate('/');
+    const result = saveTemplate(updatedTemplates);
+    if (result) {
+      navigate('/');
+    } else {
+      showAlert('저장에 실패했습니다.');
+    }
   };
 
   return isEdit ? (

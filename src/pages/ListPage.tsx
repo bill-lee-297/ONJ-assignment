@@ -30,8 +30,12 @@ const ListPage = () => {
   const handleDelete = async (id: string) => {
     const confirmed = await showAlert('템플릿을 삭제하시겠습니까?', { cancel: true });
     if (!confirmed) return;
-    deleteTemplate(id);
-    getTemplatesList();
+    const result = deleteTemplate(id);
+    if (result) {
+      getTemplatesList();
+    } else {
+      showAlert('삭제에 실패했습니다.');
+    }
   };
 
   useEffect(() => {

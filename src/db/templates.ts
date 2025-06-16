@@ -14,7 +14,7 @@ const getTemplates = (text: string): Template[] | Template | null => {
     const templates = JSON.parse(localStorage.getItem('templates') || '[]');
 
     return templates
-      .filter((tpl: Template) => tpl.title.toLowerCase().includes(text))
+      .filter((tpl: Template) => tpl.title.toLowerCase().includes(text.toLowerCase()))
       .sort((a: Template, b: Template) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
   } catch (error) {
     console.error('Failed to parse templates from localStorage:', error);
@@ -35,8 +35,10 @@ const getTemplate = (id: string): Template | null => {
 const saveTemplate = (templates: Template[]) => {
   try {
     localStorage.setItem('templates', JSON.stringify(templates));
+    return true;
   } catch (error) {
     console.error('Failed to save templates to localStorage:', error);
+    return false;
   }
 };
 
@@ -45,8 +47,10 @@ const deleteTemplate = (id: string) => {
     const templates = JSON.parse(localStorage.getItem('templates') || '[]');
     const newTemplates = templates.filter((tpl: Template) => tpl.id !== id);
     localStorage.setItem('templates', JSON.stringify(newTemplates));
+    return true;
   } catch (error) {
     console.error('Failed to delete template from localStorage:', error);
+    return false;
   }
 };
 

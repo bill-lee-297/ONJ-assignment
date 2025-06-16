@@ -25,31 +25,49 @@ export const useCreateStore = create<CreateState>((set, get) => ({
   ...initialState,
   setTitle: title => {
     set({ title });
-    updatePreviewTemplate({ title });
+    const result = updatePreviewTemplate({ title });
+    if (!result) {
+      console.error('Failed to update preview template title');
+    }
   },
   setDescription: description => {
     set({ description });
-    updatePreviewTemplate({ description });
+    const result = updatePreviewTemplate({ description });
+    if (!result) {
+      console.error('Failed to update preview template description');
+    }
   },
   setQuestions: questions => {
     const newQuestions = [...questions];
     set({ questions: newQuestions });
-    updatePreviewTemplate({ questions: newQuestions });
+    const result = updatePreviewTemplate({ questions: newQuestions });
+    if (!result) {
+      console.error('Failed to update preview template questions');
+    }
   },
   setQuestion: question => {
     const questions = get().questions;
     const newQuestions = questions.map(item => (item.id === question.id ? question : item));
     set({ questions: newQuestions });
-    updatePreviewTemplate({ questions: newQuestions });
+    const result = updatePreviewTemplate({ questions: newQuestions });
+    if (!result) {
+      console.error('Failed to update preview template question');
+    }
   },
   deleteQuestion: questionId => {
     const questions = get().questions;
     const newQuestions = questions.filter(question => question.id !== questionId);
     set({ questions: newQuestions });
-    updatePreviewTemplate({ questions: newQuestions });
+    const result = updatePreviewTemplate({ questions: newQuestions });
+    if (!result) {
+      console.error('Failed to update preview template delete question');
+    }
   },
   resetStore: () => {
     set(initialState);
-    updatePreviewTemplate(initialState);
+    const result = updatePreviewTemplate(initialState);
+    if (!result) {
+      console.error('Failed to update preview template reset store');
+    }
   },
 }));

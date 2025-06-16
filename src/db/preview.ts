@@ -20,8 +20,10 @@ const updatePreviewTemplate = (updates: PreviewTemplate) => {
       ...updates,
     };
     localStorage.setItem('previewTemplate', JSON.stringify(newTemplate));
+    return true;
   } catch (error) {
-    console.error('Failed to save previewTemplate to localStorage:', error);
+    console.error('Failed to update previewTemplate:', error);
+    return false;
   }
 };
 
