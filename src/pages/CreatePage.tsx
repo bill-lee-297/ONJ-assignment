@@ -33,7 +33,11 @@ const CreatePage = () => {
       setDescription(template.description);
       setQuestions(template.questions);
     } else {
-      resetStore();
+      const result = resetStore();
+      if (!result) {
+        console.error('Failed to reset store');
+        return;
+      }
       setQuestions([
         {
           id: `qst-${uuidv4()}`,
@@ -44,12 +48,11 @@ const CreatePage = () => {
     }
   }, [id, isEdit, setTitle, setDescription, setQuestions, resetStore]);
 
-  return (
-    isEdit && error ? (
-      <div className="h-full w-full flex flex-col justify-center">
-        <div className="text-center">{error}</div>
-      </div>
-    ) : (
+  return isEdit && error ? (
+    <div className="h-full w-full flex flex-col justify-center">
+      <div className="text-center">{error}</div>
+    </div>
+  ) : (
     <div className="h-full w-full flex flex-col justify-center">
       <div className="flex flex-row items-center justify-between mb-6">
         <MenuTitle>{isEdit ? '템플릿 수정' : '새 템플릿 생성'}</MenuTitle>
@@ -61,7 +64,6 @@ const CreatePage = () => {
         <CreateQuestion />
       </form>
     </div>
-    )
   );
 };
 

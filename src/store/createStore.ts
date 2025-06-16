@@ -12,7 +12,7 @@ interface CreateState {
   setQuestions: (questions: Question[]) => void;
   setQuestion: (question: Question) => void;
   deleteQuestion: (questionId: string) => void;
-  resetStore: () => void;
+  resetStore: () => boolean;
 }
 
 const initialState = {
@@ -66,8 +66,12 @@ export const useCreateStore = create<CreateState>((set, get) => ({
   resetStore: () => {
     set(initialState);
     const result = updatePreviewTemplate(initialState);
-    if (!result) {
+
+    if (result) {
+      return true;
+    } else {
       console.error('Failed to update preview template reset store');
+      return false;
     }
   },
 }));
