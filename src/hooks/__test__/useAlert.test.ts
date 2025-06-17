@@ -28,7 +28,7 @@ describe('useAlert 훅', () => {
     await expect(alertModal).not.toBeInTheDocument();
   });
 
-  test('useAlert 훅 렌더링 확인 취소 클릭', async () => {
+  test('useAlert 훅 렌더링 취소 클릭', async () => {
     const { result } = renderHook(() => useAlert(), { wrapper: OverlayProvider });
     let returnModal: Promise<boolean>;
     act(() => {

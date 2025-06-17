@@ -3,7 +3,7 @@ import { getPreviewTemplate, updatePreviewTemplate } from '../preview';
 import type { Template } from '@/types/templates';
 
 describe('preview db 함수 테스트', () => {
-  const mockPreview: Partial<Template> = {
+  const mockPreview: Template = {
     id: 'tpl-0019fcc9-b9a0-41a9-baa5-7c6bda5236cc',
     title: 'OO TV 구매 만족도 조사입니다.',
     description: 'OO TV 구매 만족도 조사입니다. 설문에 응해주시면 서비스를 제공하는데 큰 도움이 됩니다.',
