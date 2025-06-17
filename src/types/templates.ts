@@ -8,6 +8,12 @@ export interface Question {
   required?: boolean;
 }
 
+export interface CreateTemplate {
+  title: string;
+  description: string;
+  questions: Question[];
+}
+
 export interface Template {
   id: string;
   title: string;
