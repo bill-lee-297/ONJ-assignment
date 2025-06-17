@@ -7,7 +7,7 @@ import ContentDesc from '@/components/Atoms/ContentDesc';
 import ContentTitle from '@/components/Atoms/ContentTitle';
 import IconButton from '@/components/Atoms/IconButton';
 import MenuTitle from '@/components/Atoms/MenuTitle';
-import ActionButtonRow from '@/components/Create/ActionButtonRow';
+import ActionButtonRow from '@/components/Atoms/ActionButtonRow';
 import DetailQuestionOptions from '@/components/DetailQuestionOptions';
 import { getTemplate, deleteTemplate } from '@/db/templates';
 import useAlert from '@/hooks/useAlert';

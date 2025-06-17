@@ -3,7 +3,7 @@ import { GrDuplicate } from 'react-icons/gr';
 import { useParams, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import ActionButtonRow from './ActionButtonRow';
+import ActionButtonRow from '../Atoms/ActionButtonRow';
 
 import IconButton from '@/components/Atoms/IconButton';
 import { getAllTemplates, saveTemplate } from '@/db/templates';
